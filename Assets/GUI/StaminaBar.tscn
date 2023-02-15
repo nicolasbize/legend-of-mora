@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/GUI/stamina-bar.png" type="Texture" id=1]
+[ext_resource path="res://Assets/GUI/stamina-tick.png" type="Texture" id=2]
+[ext_resource path="res://Assets/GUI/StaminaBar.gd" type="Script" id=3]
+
+[node name="StaminaBar" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Bar" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Tick" type="Sprite" parent="."]
+scale = Vector2( 1e-05, 1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
