@@ -10,12 +10,13 @@ config_version=4
 
 [application]
 
-config/name="Family-quest"
+config/name="The Legend of Mora"
 run/main_scene="res://World.tscn"
 
 [autoload]
 
 DiceHelper="*res://DiceHelper.gd"
+GameState="*res://GameState.gd"
 
 [display]
 

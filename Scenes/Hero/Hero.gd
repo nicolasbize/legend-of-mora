@@ -50,18 +50,19 @@ func _ready():
 	attack_button.connect("pressed", self, "on_attack_press")
 
 func _physics_process(delta):
-	match current_state:
-		state.IDLE:
-			animation_player.play("Idle")
-			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-		state.MOVING:
-			animation_player.play("Run")
-			velocity = velocity.move_toward(Vector2.RIGHT * max_speed, acceleration * delta)
-		state.ATTACK:
-			animation_player.play("Attack")
-		state.DYING:
-			animation_player.play("Die")
-	velocity = move_and_slide(velocity)
+	if not GameState.in_town:
+		match current_state:
+			state.IDLE:
+				animation_player.play("Idle")
+				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+			state.MOVING:
+				animation_player.play("Run")
+				velocity = velocity.move_toward(Vector2.RIGHT * max_speed, acceleration * delta)
+			state.ATTACK:
+				animation_player.play("Attack")
+			state.DYING:
+				animation_player.play("Die")
+		velocity = move_and_slide(velocity)
 
 func is_in_battle():
 	return current_enemy != null
