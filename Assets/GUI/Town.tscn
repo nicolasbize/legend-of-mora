@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/GUI/town-bg.png" type="Texture" id=1]
 [ext_resource path="res://Assets/GUI/btn-alchimist.png" type="Texture" id=2]
@@ -6,10 +6,9 @@
 [ext_resource path="res://Assets/GUI/btn-go.png" type="Texture" id=4]
 [ext_resource path="res://Assets/GUI/btn-library.png" type="Texture" id=5]
 [ext_resource path="res://Assets/GUI/btn-armory.png" type="Texture" id=6]
-[ext_resource path="res://Assets/GUI/coin-icon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Fonts/game_font.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Assets/GUI/ProgressBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/GUI/Town.gd" type="Script" id=10]
+[ext_resource path="res://Assets/GUI/btn-stats.png" type="Texture" id=11]
 
 [node name="Town" type="Control"]
 margin_right = 128.0
@@ -28,77 +27,75 @@ margin_left = 10.0
 margin_top = 11.0
 margin_right = 50.0
 margin_bottom = 21.0
-custom_colors/font_color = Color( 0.545098, 0.901961, 0.858824, 1 )
+custom_colors/font_color = Color( 0.658824, 0.960784, 0.92549, 1 )
 custom_fonts/font = ExtResource( 8 )
 text = "Day 1"
 
-[node name="CoinIcon" type="TextureRect" parent="TextureRect"]
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 65.0
-margin_bottom = 20.0
-texture = ExtResource( 7 )
-stretch_mode = 3
-
 [node name="GoldLabel" type="Label" parent="TextureRect"]
-margin_left = 67.0
+margin_left = 68.0
 margin_top = 11.0
-margin_right = 95.0
+margin_right = 112.0
 margin_bottom = 21.0
-custom_colors/font_color = Color( 0.92549, 0.913725, 0.0431373, 1 )
+custom_colors/font_color = Color( 0.658824, 0.960784, 0.92549, 1 )
 custom_fonts/font = ExtResource( 8 )
-text = "12"
+text = "village"
 
 [node name="DestLabel" type="Label" parent="TextureRect"]
 margin_left = 10.0
-margin_top = 55.0
+margin_top = 52.0
 margin_right = 116.0
-margin_bottom = 65.0
+margin_bottom = 62.0
 custom_colors/font_color = Color( 0.92549, 0.913725, 0.0431373, 1 )
 custom_fonts/font = ExtResource( 8 )
 align = 1
 
 [node name="ButtonBlacksmith" parent="TextureRect" instance=ExtResource( 3 )]
-display_name = "BlackSmith"
+margin_top = 29.0
+margin_bottom = 49.0
+display_name = "Blacksmith"
 label_path = NodePath("../DestLabel")
 
 [node name="ButtonArmory" parent="TextureRect" instance=ExtResource( 3 )]
 margin_left = 39.0
+margin_top = 29.0
 margin_right = 60.0
+margin_bottom = 49.0
 texture_normal = ExtResource( 6 )
 display_name = "Armory"
 label_path = NodePath("../DestLabel")
 
 [node name="ButtonAlchimist" parent="TextureRect" instance=ExtResource( 3 )]
 margin_left = 67.0
+margin_top = 29.0
 margin_right = 88.0
+margin_bottom = 49.0
 texture_normal = ExtResource( 2 )
 display_name = "Alchemist"
 label_path = NodePath("../DestLabel")
 
 [node name="ButtonLibrary" parent="TextureRect" instance=ExtResource( 3 )]
 margin_left = 95.0
+margin_top = 29.0
 margin_right = 116.0
+margin_bottom = 49.0
 texture_normal = ExtResource( 5 )
 display_name = "Library"
 label_path = NodePath("../DestLabel")
 
 [node name="ButtonGo" parent="TextureRect" instance=ExtResource( 3 )]
-margin_left = 98.0
-margin_top = 64.0
-margin_right = 115.0
-margin_bottom = 80.0
+margin_left = 95.0
+margin_top = 65.0
+margin_right = 112.0
+margin_bottom = 81.0
 texture_normal = ExtResource( 4 )
 display_name = "Leave town"
 label_path = NodePath("../DestLabel")
 
-[node name="XPBar" parent="TextureRect" instance=ExtResource( 9 )]
-position = Vector2( 11, 24 )
-
-[node name="Background" parent="TextureRect/XPBar" index="0"]
-margin_right = 105.0
-
-[node name="Filler" parent="TextureRect/XPBar" index="1"]
-color = Color( 0.92549, 0.913725, 0.0431373, 1 )
-
-[editable path="TextureRect/XPBar"]
+[node name="ButtonStats" parent="TextureRect" instance=ExtResource( 3 )]
+margin_left = 73.0
+margin_top = 65.0
+margin_right = 90.0
+margin_bottom = 81.0
+texture_normal = ExtResource( 11 )
+display_name = "Stats"
+label_path = NodePath("../DestLabel")

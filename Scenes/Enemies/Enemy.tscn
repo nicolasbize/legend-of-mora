@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Assets/GUI/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/GUI/ProgressBar.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -144,6 +144,19 @@ collision_mask = 2
 anims/Hurt = SubResource( 1 )
 anims/RESET = SubResource( 4 )
 
-[node name="HealthBar" parent="." instance=ExtResource( 2 )]
-
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="HealthBar" parent="." instance=ExtResource( 2 )]
+position = Vector2( -8, 4 )
+
+[node name="Background" parent="HealthBar" index="0"]
+margin_right = 16.0
+
+[node name="Inner" parent="HealthBar" index="1"]
+margin_right = 14.0
+
+[node name="Filler" parent="HealthBar" index="2"]
+margin_right = 15.0
+color = Color( 0.807843, 0.113725, 0.164706, 1 )
+
+[editable path="HealthBar"]

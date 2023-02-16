@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/GUI/Blacksmith.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/GUI/shield-icon.png" type="Texture" id=2]
+
+[node name="Armory" instance=ExtResource( 1 )]
+shop_type = 1
+
+[node name="ShopLabel" parent="Background" index="0"]
+text = "armory"
+
+[node name="Stat1Icon" parent="Background" index="2"]
+texture = ExtResource( 2 )
+
+[node name="Stat1Label" parent="Background" index="3"]
+custom_colors/font_color = Color( 0.0705882, 0.670588, 0.898039, 1 )
+
+[node name="Req1Icon" parent="Background/PurchaseButton" index="0"]
+texture = ExtResource( 2 )
+
+[node name="Req1Label" parent="Background/PurchaseButton" index="1"]
+custom_colors/font_color = Color( 0.0705882, 0.670588, 0.898039, 1 )

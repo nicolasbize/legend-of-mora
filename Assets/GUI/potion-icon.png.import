@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hero-health-start.png-16d1f6be01e017367d3b59b2ef39f654.stex"
+path="res://.import/potion-icon.png-cd8358e47a86d68e032ef0db1f2f131f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GUI/hero-health-start.png"
-dest_files=[ "res://.import/hero-health-start.png-16d1f6be01e017367d3b59b2ef39f654.stex" ]
+source_file="res://Assets/GUI/potion-icon.png"
+dest_files=[ "res://.import/potion-icon.png-cd8358e47a86d68e032ef0db1f2f131f.stex" ]
 
 [params]
 

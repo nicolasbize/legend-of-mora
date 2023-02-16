@@ -12,12 +12,12 @@ signal die
 const Explosion = preload("res://Assets/FX/Explosion.tscn")
 const DamageIndicator = preload("res://Assets/FX/DamageIndicator.tscn")
 
-export(int) var max_health := 5
+var delay_attack := 1
+var max_health := 5
 export(int) var health := 5
 export(String) var weapon := "1d2+1"
 export(float) var speed := 2.0
-export(int) var armor := 0
-export(float) var delay_attack := 1
+export(int) var gold := 0
 var player = null
 var state = IDLE
 
@@ -27,6 +27,7 @@ func _ready():
 	connect("hit", self, "get_hurt")
 	hurt_animation_player.play("RESET")
 	attack_timer.connect("timeout", self, "on_attack_timer_timeout")
+	max_health = health
 
 func _process(delta):
 	if player != null:
@@ -61,7 +62,7 @@ func get_hurt(dmg):
 	health -= dmg
 	if health < 0:
 		health = 0
-	healthbar.refresh(health, max_health)
+	healthbar.goto_value(health, max_health, 200)
 	if health == 0:
 		var explosion = Explosion.instance()
 		get_owner().add_child(explosion)

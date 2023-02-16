@@ -28,7 +28,8 @@ shader_param/active = false
 extents = Vector2( 5.5, 4 )
 
 [node name="SmallBlobEnemy" instance=ExtResource( 1 )]
-weapon = "2d6+5"
+weapon = "1d2"
+gold = 4
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )
@@ -38,5 +39,7 @@ texture = ExtResource( 2 )
 position = Vector2( -0.5, -1 )
 shape = SubResource( 1 )
 
-[node name="HealthBar" parent="." index="4"]
-position = Vector2( -7, 5 )
+[node name="Inner" parent="HealthBar" index="1"]
+margin_right = 15.0
+
+[editable path="HealthBar"]

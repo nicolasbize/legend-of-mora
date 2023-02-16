@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hero-health-end.png-e3ec8450440b7c42f7724ed435723b99.stex"
+path="res://.import/btn-boss.png-8f4c73fa6a6eb16704b64a8d162fe7d0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GUI/hero-health-end.png"
-dest_files=[ "res://.import/hero-health-end.png-e3ec8450440b7c42f7724ed435723b99.stex" ]
+source_file="res://Assets/GUI/btn-boss.png"
+dest_files=[ "res://.import/btn-boss.png-8f4c73fa6a6eb16704b64a8d162fe7d0.stex" ]
 
 [params]
 

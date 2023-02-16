@@ -2,10 +2,42 @@
 
 [ext_resource path="res://Assets/GUI/stamina-bar.png" type="Texture" id=1]
 [ext_resource path="res://Assets/GUI/stamina-tick.png" type="Texture" id=2]
-[ext_resource path="res://Assets/GUI/StaminaBar.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var elapsed_time = 0
+var total_time = 0
+
+signal complete
+
+onready var tick = $Tick
+onready var timer = $Timer
+
+func _ready():
+	timer.connect(\"timeout\", self, \"on_timer_timeout\")
+	visible = false
+
+func _process(delta):
+	if visible:
+		tick.scale.x = round(16 * (total_time - timer.time_left) / total_time)
+
+func appear(time):
+	total_time = time
+	visible = true
+	timer.start(time)
+
+func cancel():
+	visible = false
+	timer.stop()
+
+func on_timer_timeout():
+	emit_signal(\"complete\")
+	visible = false
+"
 
 [node name="StaminaBar" type="Node2D"]
-script = ExtResource( 3 )
+script = SubResource( 1 )
 
 [node name="Bar" type="Sprite" parent="."]
 texture = ExtResource( 1 )
