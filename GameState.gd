@@ -1,8 +1,10 @@
 extends Node
 
-var in_town = false
 var nb_days = 1
 var max_lvl_beat = 0 # beat plains => 1, beat forest => 2, etc
+var prev_level_xp = 0
+var next_level_xp = 10
+var lvl_progression_multiplier = 1.2
 
 var weapons := [{
 	"damage": "1d4",
@@ -33,3 +35,4 @@ var skills := [{
 	"price": 2000,
 	"xp": 15
 }]
+

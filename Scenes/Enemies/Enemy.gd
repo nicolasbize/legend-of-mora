@@ -18,6 +18,7 @@ export(int) var health := 5
 export(String) var weapon := "1d2+1"
 export(float) var speed := 2.0
 export(int) var gold := 0
+export(int) var xp := 0
 var player = null
 var state = IDLE
 
@@ -68,7 +69,7 @@ func get_hurt(dmg):
 		get_owner().add_child(explosion)
 		explosion.position = position
 		call_deferred("queue_free")
-		emit_signal("die")
+		emit_signal("die", gold, xp)
 
 func on_attack_timer_timeout():
 	state = ATTACK

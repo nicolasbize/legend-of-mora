@@ -49,6 +49,7 @@ tracks/0/keys = {
 }
 
 [node name="Explosion" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -4,17 +4,20 @@ export(NodePath) var potion_button_path = null
 export(NodePath) var defend_button_path = null
 export(NodePath) var attack_button_path = null
 
+export(int) var xp := 0
 export(int) var xp_level := 1
+
 export(int) var strength := 1 # attack strength
-export(int) var dexterity := 1 # attack + defend speed
-export(int) var composition := 1 # hit points
+export(int) var agility := 1 # attack + defend speed
+export(int) var vitality := 1 # hit points
+
 export(String) var weapon := "1d3"
 export(float) var speed := 2.0
 export(int) var armor := 1
-export(int) var max_health := (3 + composition) * 4
+export(int) var max_health := 16
 export(int) var health := max_health
 export(bool) var has_potion := true
-export(int) var gold := 55
+export(int) var gold := 0
 var skills := [] # combo, berserk, deflect
 
 export(int) var acceleration := 800
@@ -40,6 +43,9 @@ onready var hit_area := $HitArea
 const DamageIndicator = preload("res://Assets/FX/DamageIndicator.tscn")
 
 signal health_change
+signal death
+signal gold_change
+signal xp_change
 
 func _ready():
 	start_timer.connect("timeout", self, "start_run")
@@ -51,19 +57,18 @@ func _ready():
 	potion_button.connect("pressed", self, "on_potion_press")
 
 func _physics_process(delta):
-	if not GameState.in_town:
-		match current_state:
-			state.IDLE:
-				animation_player.play("Idle")
-				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-			state.MOVING:
-				animation_player.play("Run")
-				velocity = velocity.move_toward(Vector2.RIGHT * max_speed, acceleration * delta)
-			state.ATTACK:
-				animation_player.play("Attack")
-			state.DYING:
-				animation_player.play("Die")
-		velocity = move_and_slide(velocity)
+	match current_state:
+		state.IDLE:
+			animation_player.play("Idle")
+			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		state.MOVING:
+			animation_player.play("Run")
+			velocity = velocity.move_toward(Vector2.RIGHT * max_speed, acceleration * delta)
+		state.ATTACK:
+			animation_player.play("Attack")
+		state.DYING:
+			animation_player.play("Die")
+	velocity = move_and_slide(velocity)
 
 func is_in_battle():
 	return current_enemy != null
@@ -102,6 +107,7 @@ func finish_attack_animation():
 
 func finish_dying_animation():
 	current_state = state.DEAD
+	emit_signal("death")
 
 func get_hurt(dmg):
 	hurt_animation_player.play("Hurt")
@@ -124,9 +130,13 @@ func process_death():
 	attack_button.disabled = true
 	defend_button.disabled = true
 
-func enemy_death():
+func enemy_death(gold_award, xp_award):
 	current_enemy = null
 	start_timer.start(0.3)
+	gold += gold_award
+	xp += xp_award
+	emit_signal("gold_change", gold)
+	emit_signal("xp_change", xp)
 
 func reset_attack():
 	attack_button.frame = 0

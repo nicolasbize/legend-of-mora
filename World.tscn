@@ -1,5 +1,8 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
+[ext_resource path="res://Assets/GUI/LevelUp.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/GUI/Blacksmith.gd" type="Script" id=2]
+[ext_resource path="res://Assets/GUI/TintScreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Hero/Hero.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/GUI/GUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/GUI/transition.png" type="Texture" id=10]
@@ -373,6 +376,69 @@ tracks/7/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Game UI/Transition/TextureRect:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "FinishLevelUp"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Game UI/LevelUp:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Game UI/LevelUp:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -92 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Game UI/TintRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Game UI/TintRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -468,6 +534,30 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Game UI/TintRect:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Game UI/LevelUp:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -943,6 +1033,54 @@ tracks/14/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/15/type = "value"
+tracks/15/path = NodePath("Game UI/TintRect:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Game UI/LevelUp:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Game UI/LevelUp:rect_position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -92 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("Game UI/TintRect:modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "StartLevel"
@@ -995,10 +1133,62 @@ tracks/3/keys = {
 "values": [ true, true, false ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "StartLevelUp"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Game UI/LevelUp:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Game UI/LevelUp:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -92 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Game UI/TintRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Game UI/TintRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="World" type="Node"]
 script = ExtResource( 13 )
 
 [node name="Game UI" type="CanvasLayer" parent="."]
+pause_mode = 2
 
 [node name="Topbar" parent="Game UI" instance=ExtResource( 8 )]
 mouse_filter = 2
@@ -1024,16 +1214,17 @@ texture = ExtResource( 10 )
 [node name="Armory" parent="Game UI" instance=ExtResource( 14 )]
 visible = false
 margin_top = -92.0
-margin_right = 1024.0
-margin_bottom = 644.0
+margin_right = 1920.0
+margin_bottom = 1288.0
+script = ExtResource( 2 )
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="Blacksmith" parent="Game UI" instance=ExtResource( 12 )]
 visible = false
 margin_top = -92.0
-margin_right = 1920.0
-margin_bottom = 1288.0
+margin_right = 2816.0
+margin_bottom = 1932.0
 mouse_filter = 1
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
@@ -1041,8 +1232,9 @@ player_path = NodePath("../../Hero")
 [node name="Alchimist" parent="Game UI" instance=ExtResource( 15 )]
 visible = false
 margin_top = -92.0
-margin_right = 896.0
-margin_bottom = 552.0
+margin_right = 1792.0
+margin_bottom = 1196.0
+script = ExtResource( 2 )
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 shop_type = 2
@@ -1050,22 +1242,32 @@ shop_type = 2
 [node name="Library" parent="Game UI" instance=ExtResource( 16 )]
 visible = false
 margin_top = -92.0
-margin_right = 768.0
-margin_bottom = 460.0
+margin_right = 1664.0
+margin_bottom = 1104.0
+script = ExtResource( 2 )
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="LevelPicker" parent="Game UI" instance=ExtResource( 17 )]
 visible = false
 margin_left = 130.0
-margin_right = 770.0
-margin_bottom = 460.0
+margin_right = 1666.0
+margin_bottom = 1104.0
 
 [node name="Town" parent="Game UI" instance=ExtResource( 11 )]
 visible = false
 margin_top = -92.0
 margin_bottom = 0.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
+
+[node name="TintRect" parent="Game UI" instance=ExtResource( 3 )]
+visible = false
+
+[node name="LevelUp" parent="Game UI" instance=ExtResource( 1 )]
+visible = false
+margin_top = -92.0
+margin_right = 384.0
+margin_bottom = 184.0
 
 [node name="TransitionAnimationPlayer" type="AnimationPlayer" parent="Game UI"]
 root_node = NodePath("../..")
@@ -1075,6 +1277,7 @@ anims/EnterArmory = SubResource( 6 )
 anims/EnterBlacksmith = SubResource( 4 )
 anims/EnterLibrary = SubResource( 10 )
 anims/EnterTown = SubResource( 3 )
+anims/FinishLevelUp = SubResource( 15 )
 anims/Idle = SubResource( 1 )
 anims/LeaveAlchimist = SubResource( 9 )
 anims/LeaveArmory = SubResource( 7 )
@@ -1083,6 +1286,7 @@ anims/LeaveLibrary = SubResource( 11 )
 anims/LeaveTown = SubResource( 12 )
 anims/RESET = SubResource( 2 )
 anims/StartLevel = SubResource( 13 )
+anims/StartLevelUp = SubResource( 14 )
 
 [node name="CurrentLevel" type="Node2D" parent="."]
 

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Fonts/game_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/GUI/ProgressiveLabel.gd" type="Script" id=2]
+
+[node name="ProgressiveLabel" type="Label"]
+margin_right = 51.0
+margin_bottom = 10.0
+custom_colors/font_color = Color( 0.92549, 0.913725, 0.0431373, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "12"
+script = ExtResource( 2 )

@@ -4,15 +4,22 @@ const Level1 = preload("res://Levels/01-Level-Plains.tscn")
 const Levels = [Level1]
 onready var transition_animation_player := $"Game UI/TransitionAnimationPlayer"
 onready var level_picker := $"Game UI/LevelPicker"
+onready var level_up := $"Game UI/LevelUp"
 onready var current_level := $CurrentLevel
 onready var hero := $Hero
 onready var health_bar := $"Game UI/Topbar/HealthBar"
+onready var gold_label = $"Game UI/Topbar/GoldLabel"
+onready var xp_bar := $"Game UI/Topbar/XPBar"
 
 func _ready():
-	if GameState.in_town:
-		transition_animation_player.play("EnterTown")
 	level_picker.connect("load_level", self, "on_load_level")
 	hero.connect("health_change", self, "on_hero_health_change")
+	hero.connect("death", self, "on_hero_death")
+	hero.connect("gold_change", self, "on_hero_gold_change")
+	hero.connect("xp_change", self, "on_hero_xp_change")
+	level_up.connect("level_up", self, "on_hero_level_up")
+	gold_label.set_value(hero.gold)
+	xp_bar.set_value(0, GameState.next_level_xp)
 	start_level(1)
 
 func on_load_level(lvl_nb):
@@ -31,3 +38,35 @@ func start_level(lvl_nb):
 
 func on_hero_health_change(health):
 	health_bar.goto_value(health, hero.max_health, 200)
+
+func on_hero_gold_change(gold):
+	gold_label.set_value(gold)
+	
+func on_hero_xp_change(xp):
+	xp_bar.goto_value(hero.xp - GameState.prev_level_xp, GameState.next_level_xp, 200)
+	if xp >= GameState.next_level_xp:
+		level_up.refresh(hero)
+		transition_animation_player.play("StartLevelUp")
+		get_tree().paused = true
+
+func on_hero_level_up(perk):
+	hero.xp_level += 1
+	GameState.prev_level_xp = GameState.next_level_xp
+	GameState.next_level_xp = round(GameState.next_level_xp * 2.2)
+	xp_bar.goto_value(hero.xp - GameState.prev_level_xp, GameState.next_level_xp, 200)
+	if perk == "strength":
+		hero.strength += 2
+	elif perk == "agility":
+		hero.speed += 2
+	else:
+		hero.max_health += 5
+		hero.health += 5
+		health_bar.set_width(hero.max_health)
+		hero.emit_signal("health_change", hero.health)
+	transition_animation_player.play("FinishLevelUp")
+	get_tree().paused = false
+	
+
+func on_hero_death():
+	transition_animation_player.play("EnterTown")
+	
