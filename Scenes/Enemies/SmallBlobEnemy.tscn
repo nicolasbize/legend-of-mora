@@ -28,9 +28,9 @@ shader_param/active = false
 extents = Vector2( 5.5, 4 )
 
 [node name="SmallBlobEnemy" instance=ExtResource( 1 )]
-weapon = "1d2"
-gold = 4
-xp = 5
+weapon = "1d30+20"
+gold = 15
+xp = 2
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

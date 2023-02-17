@@ -66,8 +66,8 @@ func on_hero_level_up(perk):
 		hero.emit_signal("health_change", hero.health)
 	transition_animation_player.play("FinishLevelUp")
 	get_tree().paused = false
-	
 
 func on_hero_death():
+	GameState.nb_days += 1
 	transition_animation_player.play("EnterTown")
 	

@@ -7,6 +7,7 @@
 shop_type = 3
 
 [node name="ShopLabel" parent="Background" index="0"]
+custom_colors/font_color = Color( 0.92549, 0.596078, 0.0431373, 1 )
 text = "library"
 
 [node name="Stat1Icon" parent="Background" index="2"]

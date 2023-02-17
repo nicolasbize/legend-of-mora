@@ -25,3 +25,13 @@ func get_range(str_value):
 		max_value += int(mods[1])
 	return str(min_value) + "-" + str(max_value)
 	
+func get_avg(str_value):
+	var parts = str_value.split("+")
+	var total := 0.0
+	if parts.size() == 2:
+		total += int(parts[1])
+	var mods = parts[0].split("d")
+	for i in int(mods[0]):
+		total += (1 + int(mods[1])) / 2.0
+	return total
+	

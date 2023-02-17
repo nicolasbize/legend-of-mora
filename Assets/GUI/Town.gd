@@ -7,6 +7,8 @@ onready var button_blacksmith = $TextureRect/ButtonBlacksmith
 onready var button_armory = $TextureRect/ButtonArmory
 onready var button_alchimist = $TextureRect/ButtonAlchimist
 onready var button_library = $TextureRect/ButtonLibrary
+onready var button_stats = $TextureRect/ButtonStats
+onready var button_inventory = $TextureRect/ButtonInventory
 onready var button_leave = $TextureRect/ButtonGo
 
 export(NodePath) var transition_animation_path = null
@@ -20,8 +22,13 @@ func _ready():
 	button_armory.connect("pressed", self, "on_press", ["EnterArmory"])
 	button_alchimist.connect("pressed", self, "on_press", ["EnterAlchimist"])
 	button_library.connect("pressed", self, "on_press", ["EnterLibrary"])
+	button_stats.connect("pressed", self, "on_press", ["EnterStats"])
+	button_inventory.connect("pressed", self, "on_press", ["EnterInventory"])
 	button_leave.connect("pressed", self, "on_press", ["LeaveTown"])
 
 func on_press(transition):
 	if transition_animation != null:
 		transition_animation.play(transition)
+
+func refresh():
+	day_label.text = "Day " + str(GameState.nb_days)

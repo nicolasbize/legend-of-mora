@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/GUI/Buttons/btn-attack-hover.png" type="Texture" id=1]
 [ext_resource path="res://Assets/GUI/Buttons/btn-attack-disabled.png" type="Texture" id=2]
@@ -6,6 +6,56 @@
 [ext_resource path="res://Assets/GUI/Buttons/btn-attack-pressed.png" type="Texture" id=4]
 [ext_resource path="res://Assets/GUI/ProgressBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/GUI/ActionButton.gd" type="Script" id=6]
+[ext_resource path="res://Assets/GUI/Buttons/btn-skill.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Activate"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkillSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkillSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SkillSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [node name="ActionButton" type="TextureButton"]
 margin_right = 16.0
@@ -29,5 +79,16 @@ margin_right = 13.0
 [node name="Filler" parent="ProgressBar" index="2"]
 margin_right = 8.0
 color = Color( 0.00392157, 0.741176, 0.72549, 1 )
+
+[node name="SkillSprite" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = ExtResource( 7 )
+hframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Activate = SubResource( 3 )
+anims/Idle = SubResource( 1 )
+anims/RESET = SubResource( 2 )
 
 [editable path="ProgressBar"]

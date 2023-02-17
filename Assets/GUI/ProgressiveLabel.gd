@@ -10,8 +10,11 @@ var start_time = OS.get_ticks_msec()
 func _process(delta):
 	if current_value != null and current_value != target_value:
 		var elapsed:float = OS.get_ticks_msec() - start_time as float
-		if elapsed <= speed_change and elapsed > 0:
+		if elapsed <= speed_change:
 			current_value = round(lerp(start_value, target_value, elapsed / speed_change))
+			text = str(current_value)
+		else:
+			current_value = target_value
 			text = str(current_value)
 
 func set_value(value):

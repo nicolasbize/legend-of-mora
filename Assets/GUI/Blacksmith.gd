@@ -69,10 +69,10 @@ func refresh_blacksmith():
 		purchase_button.visible = false
 
 func refresh_armory():
-	stat_1_label.text = str(player.armor)
+	stat_1_label.text = "-" + str(player.armor.effect) + " dmg"
 	next_item_button.set_visible(current_index < GameState.armors.size() - 1)
 	if GameState.armors.size() > 0:
-		req_1_label.text = str(GameState.armors[current_index].armor)
+		req_1_label.text = "-" + str(GameState.armors[current_index].effect) + " dmg"
 		req_2_label.text = str(GameState.armors[current_index].price)
 		purchase_button.disabled = GameState.armors[current_index].price > player.gold
 	else:
@@ -111,18 +111,14 @@ func on_hero_gold_change(gold):
 	refresh(true)
 
 func on_purchase_press():
-	var price = 0
 	match shop_type:
 		ShopType.BLACKSMITH:
 			player.purchase_weapon(current_index)
 		ShopType.ARMORY:
 			player.purchase_armor(current_index)
 		ShopType.ALCHIMIST:
-			price = player.get_potion_price()
-			player.has_potion = true
+			player.purchase_potion()
 		ShopType.LIBRARY:
-			price = GameState.skills[current_index].price
-			player.skills.append(GameState.skills[current_index].title)
-			GameState.skills = GameState.skills.slice(0, current_index) + GameState.skills.slice(current_index + 1, GameState.skills.size() - 1)
+			player.purchase_skill(current_index)
 	current_index = 0
 	refresh()

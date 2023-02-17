@@ -14,7 +14,7 @@ export(int) var vitality := 1 # hit points
 export(float) var base_speed := 2100 # millis between each attack
 export(int) var max_health := 16
 export(int) var health := max_health
-export(bool) var has_potion := true
+export(bool) var has_potion := false
 export(int) var gold := 0
 
 var skills := [] # combo, berserk, deflect
@@ -116,8 +116,11 @@ func finish_dying_animation():
 	emit_signal("death")
 
 func get_hurt(dmg):
-	hurt_animation_player.play("Hurt")
-	var damage = DiceHelper.roll(dmg)
+	var damage = DiceHelper.roll(dmg) - armor.effect
+	if damage <= 0:
+		damage = 0
+	else:
+		hurt_animation_player.play("Hurt")
 	var dmg_indicator = DamageIndicator.instance()
 	get_owner().add_child(dmg_indicator)
 	dmg_indicator.set_text(str(damage))
@@ -162,4 +165,14 @@ func purchase_armor(index):
 	gold -= armor.price
 	emit_signal("gold_change", gold)
 	armor_sprite.texture = armor.texture
-			
+
+func purchase_potion():
+	gold -= get_potion_price()
+	emit_signal("gold_change", gold)	
+	has_potion = true
+
+func purchase_skill(index):
+	gold -= GameState.skills[index].price
+	emit_signal("gold_change", gold)	
+	skills.append(GameState.skills[index].title)
+	GameState.skills = GameState.skills.slice(0, index) + GameState.skills.slice(index + 1, GameState.skills.size() - 1)
