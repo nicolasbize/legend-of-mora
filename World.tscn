@@ -1214,8 +1214,8 @@ texture = ExtResource( 10 )
 [node name="Armory" parent="Game UI" instance=ExtResource( 14 )]
 visible = false
 margin_top = -92.0
-margin_right = 1920.0
-margin_bottom = 1288.0
+margin_right = 2048.0
+margin_bottom = 1380.0
 script = ExtResource( 2 )
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
@@ -1223,8 +1223,8 @@ player_path = NodePath("../../Hero")
 [node name="Blacksmith" parent="Game UI" instance=ExtResource( 12 )]
 visible = false
 margin_top = -92.0
-margin_right = 2816.0
-margin_bottom = 1932.0
+margin_right = 2944.0
+margin_bottom = 2024.0
 mouse_filter = 1
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
@@ -1232,8 +1232,8 @@ player_path = NodePath("../../Hero")
 [node name="Alchimist" parent="Game UI" instance=ExtResource( 15 )]
 visible = false
 margin_top = -92.0
-margin_right = 1792.0
-margin_bottom = 1196.0
+margin_right = 1920.0
+margin_bottom = 1288.0
 script = ExtResource( 2 )
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
@@ -1242,8 +1242,8 @@ shop_type = 2
 [node name="Library" parent="Game UI" instance=ExtResource( 16 )]
 visible = false
 margin_top = -92.0
-margin_right = 1664.0
-margin_bottom = 1104.0
+margin_right = 1792.0
+margin_bottom = 1196.0
 script = ExtResource( 2 )
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
@@ -1251,8 +1251,8 @@ player_path = NodePath("../../Hero")
 [node name="LevelPicker" parent="Game UI" instance=ExtResource( 17 )]
 visible = false
 margin_left = 130.0
-margin_right = 1666.0
-margin_bottom = 1104.0
+margin_right = 1794.0
+margin_bottom = 1196.0
 
 [node name="Town" parent="Game UI" instance=ExtResource( 11 )]
 visible = false
@@ -1266,8 +1266,8 @@ visible = false
 [node name="LevelUp" parent="Game UI" instance=ExtResource( 1 )]
 visible = false
 margin_top = -92.0
-margin_right = 384.0
-margin_bottom = 184.0
+margin_right = 512.0
+margin_bottom = 276.0
 
 [node name="TransitionAnimationPlayer" type="AnimationPlayer" parent="Game UI"]
 root_node = NodePath("../..")

@@ -29,6 +29,8 @@ func _ready():
 	next_item_button.connect("pressed", self, "on_next_press")
 	prev_item_button.connect("pressed", self, "on_prev_press")
 	purchase_button.connect("pressed", self, "on_purchase_press")
+	player.connect("gold_change", self, "on_hero_gold_change")
+	stat_2_label.set_value(player.gold)
 
 func on_return_button():
 	match shop_type:
@@ -56,7 +58,7 @@ func refresh(skip_gold = false):
 			refresh_library()
 
 func refresh_blacksmith():
-	stat_1_label.text = player.weapon + " (" + DiceHelper.get_range(player.weapon) + ")"
+	stat_1_label.text = player.weapon.damage + " (" + DiceHelper.get_range(player.weapon.damage) + ")"
 	next_item_button.set_visible(current_index < GameState.weapons.size() - 1)	
 	if GameState.weapons.size() > 0:
 		var item_dmg = GameState.weapons[current_index].damage
@@ -80,8 +82,8 @@ func refresh_alchimist():
 	stat_1_label.text = str(player.max_health) + " HP"
 	next_item_button.set_visible(false)
 	purchase_button.visible = player.has_potion == false
-	req_2_label.text = str(player.composition * 10)
-	purchase_button.disabled = player.composition * 10 > player.gold
+	req_2_label.text = str(player.get_potion_price())
+	purchase_button.disabled = player.get_potion_price() > player.gold
 
 func refresh_library():
 	var price = GameState.skills[current_index].price
@@ -104,24 +106,23 @@ func on_prev_press():
 	current_index -= 1
 	refresh()
 
+func on_hero_gold_change(gold):
+	stat_2_label.set_value(gold)
+	refresh(true)
+
 func on_purchase_press():
 	var price = 0
 	match shop_type:
 		ShopType.BLACKSMITH:
-			price = GameState.weapons[current_index].price
-			player.weapon = GameState.weapons[current_index].damage
-			GameState.weapons = GameState.weapons.slice(current_index + 1, GameState.weapons.size() - 1)
+			player.purchase_weapon(current_index)
 		ShopType.ARMORY:
-			price = GameState.armors[current_index].price
-			player.armor = GameState.armors[current_index].armor
-			GameState.armors = GameState.armors.slice(current_index + 1, GameState.armors.size() - 1)
+			player.purchase_armor(current_index)
 		ShopType.ALCHIMIST:
-			price = player.composition * 10
+			price = player.get_potion_price()
 			player.has_potion = true
 		ShopType.LIBRARY:
 			price = GameState.skills[current_index].price
 			player.skills.append(GameState.skills[current_index].title)
 			GameState.skills = GameState.skills.slice(0, current_index) + GameState.skills.slice(current_index + 1, GameState.skills.size() - 1)
-	player.gold -= price
 	current_index = 0
 	refresh()

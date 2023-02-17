@@ -6,14 +6,10 @@ var value := 0
 onready var background = $Background
 onready var max_amount_bar = $Inner
 onready var current_amount_bar = $Filler
-onready var timer = $Timer
 
 signal complete
 
 var max_width := 0.0
-
-# timer type
-var timer_duration = null
 
 var progressive_duration = 0
 var start_width = null
@@ -24,7 +20,6 @@ enum {DEFAULT, TIMER, PROGRESSIVE}
 var type = DEFAULT
 
 func _ready():
-	timer.connect("timeout", self, "on_timer_timeout")
 	max_width = max_amount_bar.rect_size.x
 
 func set_width(width):
@@ -34,13 +29,13 @@ func set_width(width):
 	max_width = max_amount_bar.rect_size.x
 
 func _process(delta):
-	if type == TIMER:
-		var new_width = lerp(0, max_width, (timer_duration - timer.time_left) as float / timer_duration)
-		current_amount_bar.rect_size.x = new_width
-	elif type == PROGRESSIVE:
+	if type == PROGRESSIVE:
 		var elapsed:float = OS.get_ticks_msec() - start_time as float
 		if elapsed <= progressive_duration and elapsed > 0:
 			current_amount_bar.rect_size.x = lerp(start_width, target_width, elapsed / progressive_duration)
+		elif elapsed >= progressive_duration:
+			type = DEFAULT
+			emit_signal("complete")
 
 func set_value(value, max_value):
 	type = DEFAULT
@@ -55,11 +50,5 @@ func goto_value(value, max_value, speed):
 	progressive_duration = speed
 	
 func start_timer(duration):
-	type = TIMER
-	timer_duration = duration
-	timer.start(duration)
-
-func on_timer_timeout():
-	type = DEFAULT
-	timer.stop()
-	emit_signal("complete")
+	current_amount_bar.rect_size.x = 0
+	goto_value(100, 100, duration)

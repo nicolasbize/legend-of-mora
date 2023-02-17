@@ -26,9 +26,26 @@ func refresh(hero):
 	current_hp_label.text = str(hero.max_health)
 	current_speed_label.text = str(hero.agility)
 	current_dmg_label.text = str(hero.strength)
-	hp_inc_label.text = "+5"
-	speed_inc_label.text = "+2"
-	dmg_inc_label.text = "+2"
+	if hero.vitality < GameState.max_levels: 
+		hp_inc_label.text = "+5"
+		inc_hp_button.disabled = false
+	else:
+		hp_inc_label.text = "max"
+		inc_hp_button.disabled = true
+		
+	if hero.agility < GameState.max_levels:
+		speed_inc_label.text = "+1"
+		inc_spd_button.disabled = false
+	else:
+		speed_inc_label.text = "max"
+		inc_spd_button.disabled = true
+		
+	if hero.strength < GameState.max_levels:
+		dmg_inc_label.text = "+1"
+		inc_str_button.disabled = false
+	else:
+		dmg_inc_label.text = "max"
+		inc_str_button.disabled = true
 
 func on_perk_pick(perk):
 	emit_signal("level_up", perk)

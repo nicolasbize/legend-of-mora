@@ -11,24 +11,25 @@ export(int) var strength := 1 # attack strength
 export(int) var agility := 1 # attack + defend speed
 export(int) var vitality := 1 # hit points
 
-export(String) var weapon := "1d3"
-export(float) var speed := 2.0
-export(int) var armor := 1
+export(float) var base_speed := 2100 # millis between each attack
 export(int) var max_health := 16
 export(int) var health := max_health
 export(bool) var has_potion := true
 export(int) var gold := 0
-var skills := [] # combo, berserk, deflect
 
-export(int) var acceleration := 800
-export(int) var max_speed := 150
-export(int) var friction := 800
-export(bool) var automove := true
+var skills := [] # combo, berserk, deflect
+var weapon := GameState.no_weapon
+var armor := GameState.no_armor
+
+# movement
+var velocity := Vector2.ZERO
+var movement_acceleration := 400
+var max_movement_speed := 50
+var movement_friction := 800
 
 enum state {IDLE, MOVING, ACTIVE, ATTACK, DYING, DEAD}
-
-var velocity := Vector2.ZERO
 var current_state = state.IDLE
+
 var current_enemy = null
 var potion_button = null
 var defend_button = null
@@ -37,8 +38,9 @@ var attack_button = null
 onready var animation_player := $AnimationPlayer
 onready var hurt_animation_player := $HurtAnimationPlayer
 onready var hero_sprite := $HeroSprite
-onready var start_timer := $StartTimer
 onready var hit_area := $HitArea
+onready var weapon_sprite := $WeaponSprite
+onready var armor_sprite := $ArmorSprite
 
 const DamageIndicator = preload("res://Assets/FX/DamageIndicator.tscn")
 
@@ -48,7 +50,6 @@ signal gold_change
 signal xp_change
 
 func _ready():
-	start_timer.connect("timeout", self, "start_run")
 	hit_area.connect("area_entered", self, "enter_fight")
 	potion_button = get_node(potion_button_path)
 	defend_button = get_node(defend_button_path)
@@ -60,10 +61,10 @@ func _physics_process(delta):
 	match current_state:
 		state.IDLE:
 			animation_player.play("Idle")
-			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+			velocity = velocity.move_toward(Vector2.ZERO, movement_friction * delta)
 		state.MOVING:
 			animation_player.play("Run")
-			velocity = velocity.move_toward(Vector2.RIGHT * max_speed, acceleration * delta)
+			velocity = velocity.move_toward(Vector2.RIGHT * max_movement_speed, movement_acceleration * delta)
 		state.ATTACK:
 			animation_player.play("Attack")
 		state.DYING:
@@ -75,18 +76,22 @@ func is_in_battle():
 
 func start_run():
 	current_state = state.MOVING
+	potion_button.disabled = not has_potion
+	attack_button.disabled = false
+	defend_button.disabled = false
 
 func enter_fight(enemy_area):
 	current_enemy = enemy_area.get_owner()
 	current_enemy.connect("die", self, "enemy_death")
 	current_enemy.start_fight(self)
 	current_state = state.IDLE
-	defend_button.disabled = false
-	attack_button.disabled = false
 	
 func on_attack_press():
 	current_state = state.ATTACK
-	attack_button.disable_for(speed)
+	attack_button.disable_for(get_attack_speed())
+
+func get_attack_speed():
+	return base_speed - 100 * agility
 
 func on_potion_press():
 	if health < max_health:
@@ -97,13 +102,14 @@ func on_potion_press():
 
 func perform_attack():
 	if current_enemy != null:
-		var dmg = DiceHelper.roll("1d3")
+		var dmg = DiceHelper.roll(weapon.damage + "+" + str(strength))
 		current_enemy.emit_signal("hit", dmg)
 
 func finish_attack_animation():
 	current_state = state.IDLE
 	if current_enemy == null:
-		start_timer.start(0.3)
+		yield(get_tree().create_timer(0.3), "timeout")
+		current_state = state.MOVING
 
 func finish_dying_animation():
 	current_state = state.DEAD
@@ -121,7 +127,9 @@ func get_hurt(dmg):
 	if health <= 0:
 		process_death()
 	
-
+func get_potion_price():
+	return vitality * 10
+	
 func process_death():
 	health = 0
 	current_state = state.DYING
@@ -132,7 +140,6 @@ func process_death():
 
 func enemy_death(gold_award, xp_award):
 	current_enemy = null
-	start_timer.start(0.3)
 	gold += gold_award
 	xp += xp_award
 	emit_signal("gold_change", gold)
@@ -141,3 +148,18 @@ func enemy_death(gold_award, xp_award):
 func reset_attack():
 	attack_button.frame = 0
 	current_state = state.IDLE
+
+func purchase_weapon(index):
+	weapon = GameState.weapons[index]
+	GameState.weapons = GameState.weapons.slice(index + 1, GameState.weapons.size() - 1)
+	gold -= weapon.price
+	emit_signal("gold_change", gold)
+	weapon_sprite.texture = weapon.texture
+
+func purchase_armor(index):
+	armor = GameState.armors[index]
+	GameState.armors = GameState.armors.slice(index + 1, GameState.armors.size() - 1)
+	gold -= armor.price
+	emit_signal("gold_change", gold)
+	armor_sprite.texture = armor.texture
+			

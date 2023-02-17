@@ -55,10 +55,11 @@ func on_hero_level_up(perk):
 	GameState.next_level_xp = round(GameState.next_level_xp * 2.2)
 	xp_bar.goto_value(hero.xp - GameState.prev_level_xp, GameState.next_level_xp, 200)
 	if perk == "strength":
-		hero.strength += 2
+		hero.strength += 1
 	elif perk == "agility":
-		hero.speed += 2
+		hero.agility += 1
 	else:
+		hero.vitality += 1
 		hero.max_health += 5
 		hero.health += 5
 		health_bar.set_width(hero.max_health)
