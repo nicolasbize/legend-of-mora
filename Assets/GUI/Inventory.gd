@@ -14,5 +14,5 @@ func refresh():
 	level_label.text = "lvl " + str(player.xp_level) + " (" + current_lvl_xp + "/" + next_lvl_xp + ")"
 	gold_label.text = str(player.gold)
 	weapon_label.text = player.weapon.name + " (" + str(player.weapon.damage) + ")"
-	armor_label.text = player.armor.name + " (-" + str(player.armor.effect) + ")"
+	armor_label.text = player.armor.name + " (-" + str(player.armor.effect) + " dmg)"
 	

@@ -1561,16 +1561,16 @@ texture = ExtResource( 10 )
 [node name="Armory" parent="Game UI" instance=ExtResource( 14 )]
 visible = false
 margin_top = -92.0
-margin_right = 2560.0
-margin_bottom = 1748.0
+margin_right = 2688.0
+margin_bottom = 1840.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="Blacksmith" parent="Game UI" instance=ExtResource( 12 )]
 visible = false
 margin_top = -92.0
-margin_right = 3456.0
-margin_bottom = 2392.0
+margin_right = 3584.0
+margin_bottom = 2484.0
 mouse_filter = 1
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
@@ -1578,8 +1578,8 @@ player_path = NodePath("../../Hero")
 [node name="Alchimist" parent="Game UI" instance=ExtResource( 15 )]
 visible = false
 margin_top = -92.0
-margin_right = 2432.0
-margin_bottom = 1656.0
+margin_right = 2560.0
+margin_bottom = 1748.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 shop_type = 2
@@ -1587,16 +1587,16 @@ shop_type = 2
 [node name="Library" parent="Game UI" instance=ExtResource( 16 )]
 visible = false
 margin_top = -92.0
-margin_right = 2304.0
-margin_bottom = 1564.0
+margin_right = 2432.0
+margin_bottom = 1656.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="LevelPicker" parent="Game UI" instance=ExtResource( 17 )]
 visible = false
 margin_left = 130.0
-margin_right = 2306.0
-margin_bottom = 1564.0
+margin_right = 2434.0
+margin_bottom = 1656.0
 
 [node name="Town" parent="Game UI" instance=ExtResource( 11 )]
 visible = false
@@ -1607,16 +1607,16 @@ transition_animation_path = NodePath("../TransitionAnimationPlayer")
 [node name="Stats" parent="Game UI" instance=ExtResource( 4 )]
 visible = false
 margin_top = -92.0
-margin_right = 384.0
-margin_bottom = 184.0
+margin_right = 512.0
+margin_bottom = 276.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="Inventory" parent="Game UI" instance=ExtResource( 2 )]
 visible = false
 margin_top = -92.0
-margin_right = 256.0
-margin_bottom = 92.0
+margin_right = 384.0
+margin_bottom = 184.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
@@ -1626,8 +1626,8 @@ visible = false
 [node name="LevelUp" parent="Game UI" instance=ExtResource( 1 )]
 visible = false
 margin_top = -92.0
-margin_right = 1024.0
-margin_bottom = 644.0
+margin_right = 1152.0
+margin_bottom = 736.0
 
 [node name="TransitionAnimationPlayer" type="AnimationPlayer" parent="Game UI"]
 root_node = NodePath("../..")

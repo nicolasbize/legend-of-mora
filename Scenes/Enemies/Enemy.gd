@@ -8,6 +8,7 @@ onready var animation_player := $AnimationPlayer
 
 signal hit
 signal die
+signal prepare_hit
 
 const Explosion = preload("res://Assets/FX/Explosion.tscn")
 const DamageIndicator = preload("res://Assets/FX/DamageIndicator.tscn")
@@ -36,7 +37,9 @@ func _process(delta):
 			IDLE:
 				animation_player.play("Idle")
 			ATTACK:
-				animation_player.play("Attack")
+				if animation_player.current_animation != "Attack":
+					animation_player.play("Attack")
+					animation_player.seek(0)
 
 func stop_attack_animation():
 	attack_timer.start(speed)
@@ -72,4 +75,9 @@ func get_hurt(dmg):
 		emit_signal("die", gold, xp)
 
 func on_attack_timer_timeout():
-	state = ATTACK
+	prepare_attack()
+
+func prepare_attack():
+	if player != null:
+		player.prepare_defense()
+		state = ATTACK

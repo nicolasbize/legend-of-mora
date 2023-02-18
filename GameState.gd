@@ -7,6 +7,9 @@ var next_level_xp = 30
 var lvl_progression_multiplier = 1.5
 var min_hero_speed = 0.5 # can't attack faster than this
 var max_levels = 15
+var berserk_quota = 0.25 # below 25% max_health, go berserk if you have the skill
+var berserk_dmg_multiplier = 1.5
+var combo_dmg_multiplier = 1.5
 
 var no_weapon := {
 	"damage": "1d2",

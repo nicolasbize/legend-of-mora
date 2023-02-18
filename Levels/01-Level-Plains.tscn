@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/SmallBlobEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Enemies/BigBlobEnemy.tscn" type="PackedScene" id=3]
 
 [node name="01-Level-Plains" instance=ExtResource( 1 )]
 
@@ -14,38 +15,20 @@ position = Vector2( 281, 59 )
 [node name="SmallBlobEnemy3" parent="Enemies" index="2" instance=ExtResource( 2 )]
 position = Vector2( 300, 59 )
 
-[node name="SmallBlobEnemy4" parent="Enemies" index="3" instance=ExtResource( 2 )]
-position = Vector2( 331, 59 )
-
-[node name="SmallBlobEnemy5" parent="Enemies" index="4" instance=ExtResource( 2 )]
-position = Vector2( 350, 59 )
-
-[node name="SmallBlobEnemy6" parent="Enemies" index="5" instance=ExtResource( 2 )]
-position = Vector2( 369, 59 )
-
-[node name="SmallBlobEnemy7" parent="Enemies" index="6" instance=ExtResource( 2 )]
+[node name="SmallBlobEnemy7" parent="Enemies" index="3" instance=ExtResource( 2 )]
 position = Vector2( 399, 59 )
 
-[node name="SmallBlobEnemy8" parent="Enemies" index="7" instance=ExtResource( 2 )]
+[node name="SmallBlobEnemy8" parent="Enemies" index="4" instance=ExtResource( 2 )]
 position = Vector2( 418, 59 )
 
-[node name="SmallBlobEnemy9" parent="Enemies" index="8" instance=ExtResource( 2 )]
+[node name="SmallBlobEnemy9" parent="Enemies" index="5" instance=ExtResource( 2 )]
 position = Vector2( 437, 59 )
 
-[node name="SmallBlobEnemy10" parent="Enemies" index="9" instance=ExtResource( 2 )]
+[node name="BigBlobEnemy" parent="Enemies" index="6" instance=ExtResource( 3 )]
+position = Vector2( 346, 59 )
+
+[node name="BigBlobEnemy2" parent="Enemies" index="7" instance=ExtResource( 3 )]
 position = Vector2( 464, 59 )
 
-[node name="SmallBlobEnemy11" parent="Enemies" index="10" instance=ExtResource( 2 )]
-position = Vector2( 483, 59 )
-
-[node name="SmallBlobEnemy12" parent="Enemies" index="11" instance=ExtResource( 2 )]
-position = Vector2( 502, 59 )
-
-[node name="SmallBlobEnemy13" parent="Enemies" index="12" instance=ExtResource( 2 )]
-position = Vector2( 532, 59 )
-
-[node name="SmallBlobEnemy14" parent="Enemies" index="13" instance=ExtResource( 2 )]
-position = Vector2( 551, 59 )
-
-[node name="SmallBlobEnemy15" parent="Enemies" index="14" instance=ExtResource( 2 )]
-position = Vector2( 570, 59 )
+[node name="BigBlobEnemy3" parent="Enemies" index="8" instance=ExtResource( 3 )]
+position = Vector2( 489, 59 )

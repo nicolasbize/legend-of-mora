@@ -17,7 +17,7 @@ export(int) var health := max_health
 export(bool) var has_potion := false
 export(int) var gold := 0
 
-var skills := [] # combo, berserk, deflect
+var skills := ["deflect", "berserk", "multicombo"] # multicombo, berserk, deflect
 var weapon := GameState.no_weapon
 var armor := GameState.no_armor
 
@@ -27,13 +27,15 @@ var movement_acceleration := 400
 var max_movement_speed := 50
 var movement_friction := 800
 
-enum state {IDLE, MOVING, ACTIVE, ATTACK, DYING, DEAD}
+enum state {IDLE, MOVING, ACTIVE, ATTACK, DEFENSE, DYING, DEAD}
 var current_state = state.IDLE
 
 var current_enemy = null
 var potion_button = null
 var defend_button = null
 var attack_button = null
+var ignore_next_attack := false
+var combo_next_attack := false
 
 onready var animation_player := $AnimationPlayer
 onready var hurt_animation_player := $HurtAnimationPlayer
@@ -43,6 +45,8 @@ onready var weapon_sprite := $WeaponSprite
 onready var armor_sprite := $ArmorSprite
 
 const DamageIndicator = preload("res://Assets/FX/DamageIndicator.tscn")
+const HeroTexture = preload("res://Scenes/Hero/hero.png")
+const HeroBerkserkTexture = preload("res://Scenes/Hero/hero-berserk.png")
 
 signal health_change
 signal death
@@ -56,8 +60,14 @@ func _ready():
 	attack_button = get_node(attack_button_path)
 	attack_button.connect("pressed", self, "on_attack_press")
 	potion_button.connect("pressed", self, "on_potion_press")
+	defend_button.connect("pressed", self, "on_defend_press")
 
 func _physics_process(delta):
+	if is_berserked():
+		hero_sprite.texture = HeroBerkserkTexture
+	else:
+		hero_sprite.texture = HeroTexture
+		
 	match current_state:
 		state.IDLE:
 			animation_player.play("Idle")
@@ -67,6 +77,8 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.RIGHT * max_movement_speed, movement_acceleration * delta)
 		state.ATTACK:
 			animation_player.play("Attack")
+		state.DEFENSE:
+			animation_player.play("Block")
 		state.DYING:
 			animation_player.play("Die")
 	velocity = move_and_slide(velocity)
@@ -83,12 +95,26 @@ func start_run():
 func enter_fight(enemy_area):
 	current_enemy = enemy_area.get_owner()
 	current_enemy.connect("die", self, "enemy_death")
+	current_enemy.connect("prepare_hit", self, "on_enemy_prepare_hit")
 	current_enemy.start_fight(self)
 	current_state = state.IDLE
 	
+func prepare_defense():
+	if not defend_button.disabled:
+		defend_button.activate()
+	
 func on_attack_press():
+	if attack_button.is_activated:
+		combo_next_attack = true
 	current_state = state.ATTACK
-	attack_button.disable_for(get_attack_speed())
+	attack_button.disable_for(get_attack_speed(), skills.has("multicombo"))
+
+func on_defend_press():
+	if defend_button.is_activated:
+		ignore_next_attack = true
+		current_state = state.DEFENSE
+	else:
+		defend_button.disable_for(get_attack_speed())
 
 func get_attack_speed():
 	return base_speed - 100 * agility
@@ -100,12 +126,27 @@ func on_potion_press():
 		has_potion = false
 		potion_button.disabled = true
 
+func is_berserked():
+	return skills.has("berserk") and health <= GameState.berserk_quota * max_health
+
 func perform_attack():
 	if current_enemy != null:
 		var dmg = DiceHelper.roll(weapon.damage + "+" + str(strength))
+		if is_berserked():
+			dmg *= GameState.berserk_dmg_multiplier
+		if combo_next_attack:
+			dmg *= GameState.combo_dmg_multiplier
+			combo_next_attack = false
+		dmg = round(dmg)
 		current_enemy.emit_signal("hit", dmg)
 
 func finish_attack_animation():
+	current_state = state.IDLE
+	if current_enemy == null:
+		yield(get_tree().create_timer(0.3), "timeout")
+		current_state = state.MOVING
+
+func finish_defend_animation():
 	current_state = state.IDLE
 	if current_enemy == null:
 		yield(get_tree().create_timer(0.3), "timeout")
@@ -117,18 +158,23 @@ func finish_dying_animation():
 
 func get_hurt(dmg):
 	var damage = DiceHelper.roll(dmg) - armor.effect
-	if damage <= 0:
-		damage = 0
+	if ignore_next_attack:
+		ignore_next_attack = false
+		if skills.has("deflect"):
+			current_enemy.emit_signal("hit", damage)
 	else:
-		hurt_animation_player.play("Hurt")
-	var dmg_indicator = DamageIndicator.instance()
-	get_owner().add_child(dmg_indicator)
-	dmg_indicator.set_text(str(damage))
-	dmg_indicator.position = position + Vector2.UP * 10
-	health -= damage
-	emit_signal("health_change", health)
-	if health <= 0:
-		process_death()
+		if damage <= 0:
+			damage = 0
+		else:
+			hurt_animation_player.play("Hurt")
+		var dmg_indicator = DamageIndicator.instance()
+		get_owner().add_child(dmg_indicator)
+		dmg_indicator.set_text(str(damage))
+		dmg_indicator.position = position + Vector2.UP * 10
+		health -= damage
+		emit_signal("health_change", health)
+		if health <= 0:
+			process_death()
 	
 func get_potion_price():
 	return vitality * 10
@@ -145,6 +191,7 @@ func enemy_death(gold_award, xp_award):
 	current_enemy = null
 	gold += gold_award
 	xp += xp_award
+	combo_next_attack = false
 	emit_signal("gold_change", gold)
 	emit_signal("xp_change", xp)
 
