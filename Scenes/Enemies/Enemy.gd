@@ -20,10 +20,11 @@ export(String) var weapon := "1d2+1"
 export(float) var speed := 2.0
 export(int) var gold := 0
 export(int) var xp := 0
+export(bool) var is_level_boss := false
 var player = null
-var state = IDLE
+var state = State.IDLE
 
-enum {IDLE, ATTACK}
+enum State {IDLE, ATTACK}
 
 func _ready():
 	connect("hit", self, "get_hurt")
@@ -34,16 +35,16 @@ func _ready():
 func _process(delta):
 	if player != null:
 		match state:
-			IDLE:
+			State.IDLE:
 				animation_player.play("Idle")
-			ATTACK:
+			State.ATTACK:
 				if animation_player.current_animation != "Attack":
 					animation_player.play("Attack")
 					animation_player.seek(0)
 
 func stop_attack_animation():
 	attack_timer.start(speed)
-	state = IDLE
+	state = State.IDLE
 
 func start_fight(enemy):
 	player = enemy
@@ -80,4 +81,4 @@ func on_attack_timer_timeout():
 func prepare_attack():
 	if player != null:
 		player.prepare_defense()
-		state = ATTACK
+		state = State.ATTACK

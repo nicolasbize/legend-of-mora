@@ -1,0 +1,155 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Background/Forest/mountains.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Background/Forest/sky.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Background/Forest/clouds.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Background/Forest/ground-bkg.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Background/Forest/forest-bck.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Background/Forest/trees.png" type="Texture" id=7]
+
+[node name="02-Level-Forest" instance=ExtResource( 1 )]
+level_nb = 1
+
+[node name="Sky" parent="Background/Parrallax" index="0"]
+texture = ExtResource( 3 )
+
+[node name="Clouds" parent="Background/Parrallax2" index="0"]
+texture = ExtResource( 4 )
+
+[node name="Mountains" parent="Background/Parrallax3" index="0"]
+texture = ExtResource( 2 )
+
+[node name="Tree-1" parent="Background/Parrallax4" index="0"]
+position = Vector2( 28, 29 )
+scale = Vector2( 1, 1.05882 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Background/Parrallax4" index="1"]
+position = Vector2( 42, 30 )
+scale = Vector2( 1, 1.07353 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="Background/Parrallax4" index="2"]
+position = Vector2( 67, 30.75 )
+scale = Vector2( 1.03571, 1.08088 )
+texture = ExtResource( 7 )
+
+[node name="Sprite3" type="Sprite" parent="Background/Parrallax4" index="3"]
+position = Vector2( 78, 30.5 )
+scale = Vector2( 1, 1.07353 )
+texture = ExtResource( 7 )
+
+[node name="Sprite4" type="Sprite" parent="Background/Parrallax4" index="4"]
+position = Vector2( 103, 31.25 )
+scale = Vector2( 1.03571, 1.08088 )
+texture = ExtResource( 7 )
+
+[node name="Sprite5" type="Sprite" parent="Background/Parrallax4" index="5"]
+position = Vector2( 124, 31 )
+scale = Vector2( 1.03571, 1.08088 )
+texture = ExtResource( 7 )
+
+[node name="Sprite6" type="Sprite" parent="Background/Parrallax4" index="6"]
+position = Vector2( 16, 31 )
+scale = Vector2( 1.03571, 1.08088 )
+texture = ExtResource( 7 )
+
+[node name="Plains-bck" parent="Background/Parrallax5" index="0"]
+texture = ExtResource( 6 )
+
+[node name="Grass" parent="Ground" index="0"]
+texture = ExtResource( 5 )
+
+[node name="Grass2" parent="Ground" index="1"]
+texture = ExtResource( 5 )
+
+[node name="Grass3" parent="Ground" index="2"]
+texture = ExtResource( 5 )
+
+[node name="Grass4" parent="Ground" index="3"]
+texture = ExtResource( 5 )
+
+[node name="Grass5" parent="Ground" index="4"]
+texture = ExtResource( 5 )
+
+[node name="Grass6" parent="Ground" index="5"]
+texture = ExtResource( 5 )
+
+[node name="Grass7" parent="Ground" index="6"]
+texture = ExtResource( 5 )
+
+[node name="Grass8" parent="Ground" index="7"]
+texture = ExtResource( 5 )
+
+[node name="Grass9" parent="Ground" index="8"]
+texture = ExtResource( 5 )
+
+[node name="Grass10" parent="Ground" index="9"]
+texture = ExtResource( 5 )
+
+[node name="Grass11" parent="Ground" index="10"]
+texture = ExtResource( 5 )
+
+[node name="Grass12" parent="Ground" index="11"]
+texture = ExtResource( 5 )
+
+[node name="Grass13" parent="Ground" index="12"]
+texture = ExtResource( 5 )
+
+[node name="Grass14" parent="Ground" index="13"]
+texture = ExtResource( 5 )
+
+[node name="Grass15" parent="Ground" index="14"]
+texture = ExtResource( 5 )
+
+[node name="Grass16" parent="Ground" index="15"]
+texture = ExtResource( 5 )
+
+[node name="Grass17" parent="Ground" index="16"]
+texture = ExtResource( 5 )
+
+[node name="Grass18" parent="Ground" index="17"]
+texture = ExtResource( 5 )
+
+[node name="Grass19" parent="Ground" index="18"]
+texture = ExtResource( 5 )
+
+[node name="Grass20" parent="Ground" index="19"]
+texture = ExtResource( 5 )
+
+[node name="Grass21" parent="Ground" index="20"]
+texture = ExtResource( 5 )
+
+[node name="Grass22" parent="Ground" index="21"]
+texture = ExtResource( 5 )
+
+[node name="Grass23" parent="Ground" index="22"]
+texture = ExtResource( 5 )
+
+[node name="Grass24" parent="Ground" index="23"]
+texture = ExtResource( 5 )
+
+[node name="Grass25" parent="Ground" index="24"]
+texture = ExtResource( 5 )
+
+[node name="Grass26" parent="Ground" index="25"]
+texture = ExtResource( 5 )
+
+[node name="Grass27" parent="Ground" index="26"]
+texture = ExtResource( 5 )
+
+[node name="Grass28" parent="Ground" index="27"]
+texture = ExtResource( 5 )
+
+[node name="Grass29" parent="Ground" index="28"]
+texture = ExtResource( 5 )
+
+[node name="Grass30" parent="Ground" index="29"]
+texture = ExtResource( 5 )
+
+[node name="Grass31" parent="Ground" index="30"]
+texture = ExtResource( 5 )
+
+[node name="Grass32" parent="Ground" index="31"]
+texture = ExtResource( 5 )

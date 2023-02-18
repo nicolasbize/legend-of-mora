@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "LevelEnemy",
+"language": "GDScript",
+"path": "res://LevelEnemy.gd"
+} ]
+_global_script_class_icons={
+"LevelEnemy": ""
+}
+
 [application]
 
 config/name="The Legend of Mora"

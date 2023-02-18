@@ -27,10 +27,10 @@ shader_param/active = false
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
 
-[node name="SmallBlobEnemy" instance=ExtResource( 1 )]
+[node name="Slime" instance=ExtResource( 1 )]
 weapon = "1d3"
 speed = 2.5
-gold = 15
+gold = 4
 xp = 2
 
 [node name="Sprite" parent="." index="0"]

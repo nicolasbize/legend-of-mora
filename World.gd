@@ -1,7 +1,10 @@
 extends Node
 
 const Level1 = preload("res://Levels/01-Level-Plains.tscn")
-const Levels = [Level1]
+const Level2 = preload("res://Levels/02-Level-Forest.tscn")
+const Level3 = preload("res://Levels/03-Level-Mountains.tscn")
+const Level4 = preload("res://Levels/04-Level-Inferno.tscn")
+const Levels = [Level1, Level2, Level3, Level4]
 onready var transition_animation_player := $"Game UI/TransitionAnimationPlayer"
 onready var level_picker := $"Game UI/LevelPicker"
 onready var level_up := $"Game UI/LevelUp"
@@ -20,7 +23,7 @@ func _ready():
 	level_up.connect("level_up", self, "on_hero_level_up")
 	gold_label.set_value(hero.gold)
 	xp_bar.set_value(0, GameState.next_level_xp)
-	start_level(1)
+	start_level(4)
 
 func on_load_level(lvl_nb):
 	start_level(lvl_nb)

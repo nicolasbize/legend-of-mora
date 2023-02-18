@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/GUI/ProgressBar.tscn" type="PackedScene" id=2]
@@ -89,6 +89,9 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 10, 10.5 )
+
 [sub_resource type="Animation" id=1]
 resource_name = "Hurt"
 length = 0.3
@@ -139,6 +142,8 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColliderArea"]
+position = Vector2( 0, -6.5 )
+shape = SubResource( 8 )
 
 [node name="HurtAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Hurt = SubResource( 1 )

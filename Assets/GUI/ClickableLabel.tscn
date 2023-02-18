@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Fonts/game_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/GUI/ClickableLabel.gd" type="Script" id=2]
+
+[node name="ClickableLabel" type="Label"]
+margin_right = 67.0
+margin_bottom = 11.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 1 )
+text = "text"
+align = 1
+script = ExtResource( 2 )
+disabled_color = Color( 0.34902, 0.34902, 0.34902, 1 )

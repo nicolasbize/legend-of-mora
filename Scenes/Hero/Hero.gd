@@ -12,12 +12,12 @@ export(int) var agility := 1 # attack + defend speed
 export(int) var vitality := 1 # hit points
 
 export(float) var base_speed := 2100 # millis between each attack
-export(int) var max_health := 16
+export(int) var max_health := 12
 export(int) var health := max_health
 export(bool) var has_potion := false
 export(int) var gold := 0
 
-var skills := ["deflect", "berserk", "multicombo"] # multicombo, berserk, deflect
+var skills := [] # multicombo, berserk, deflect
 var weapon := GameState.no_weapon
 var armor := GameState.no_armor
 

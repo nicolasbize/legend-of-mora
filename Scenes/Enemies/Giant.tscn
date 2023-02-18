@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Enemies/giant.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=2]
+
+[node name="Giant" instance=ExtResource( 2 )]
+health = 35
+weapon = "3d6+4"
+speed = 3.0
+gold = 65
+xp = 30
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -11 )
+texture = ExtResource( 1 )
+
+[editable path="HealthBar"]

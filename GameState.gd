@@ -144,8 +144,6 @@ var armors := [{
 	"name": "gold plate"
 }]
 
-
-
 var skills := [{
 	"title": "multicombo",
 	"price": 10,
@@ -160,3 +158,41 @@ var skills := [{
 	"xp": 15
 }]
 
+enum E {None, Slime, Slime2, Slime3, Blob, Blob2, Blob3, Giant, Giant2, Giant3, Gnome, Gnome2, Gnome3, Rat, Rat2, Rat3, Vermin, Vermin2, Vermin3, Warrior, Warrior2, Warrior3, Inferno, Treasure, Event}
+
+var levels = [[
+	[E.Slime, E.Slime, E.Slime, E.Slime2],
+	[E.Slime, E.Slime, E.Blob, E.Blob, E.Blob2],
+	[E.Event],
+	[E.Vermin, E.Blob2, E.Blob2],
+	[E.Slime3, E.Treasure],
+	[E.Blob2, E.Blob2, E.Blob3],
+	[E.Vermin2],
+], [
+	[E.Vermin2, E.Vermin2, E.Vermin3],
+	[E.Slime3, E.Slime3, E.Blob3],
+	[E.Event],
+	[E.Blob3, E.Blob3, E.Rat, E.Rat],
+	[E.Treasure],
+	[E.Rat2, E.Vermin3, E.Rat2],
+	[E.Warrior, E.Rat2, E.Rat3]
+], [
+	[E.Rat3, E.Rat3, E.Vermin3],
+	[E.Warrior, E.Warrior2, E.Warrior2],
+	[E.Event],
+	[E.Gnome, E.Gnome, E.Gnome, E.Gnome2],
+	[E.Treasure],
+	[E.Blob3, E.Warrior3, E.Giant],
+	[E.Gnome2, E.Gnome2, E.Giant, E.Gnome3],
+	[E.Giant2]
+], [
+	[E.Slime3, E.Slime3, E.Slime3],
+	[E.Blob3, E.Blob3, E.Blob3],
+	[E.Vermin3, E.Vermin3, E.Vermin3],
+	[E.Rat3, E.Rat3, E.Rat3],
+	[E.Warrior3, E.Warrior3, E.Warrior3],
+	[E.Gnome3, E.Gnome3, E.Gnome3],
+	[E.Giant3, E.Giant3, E.Giant3],
+	[], [],
+	[E.Inferno]
+]]

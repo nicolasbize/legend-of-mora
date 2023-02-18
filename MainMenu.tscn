@@ -1,0 +1,136 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Fonts/intro_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/CutScenes/title.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Fonts/game_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://Assets/GUI/ClickableLabel.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "TransionScene"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_transition_complete"
+} ]
+}
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 128.0
+margin_bottom = 92.0
+texture = ExtResource( 2 )
+
+[node name="TitleLabel" type="Label" parent="TextureRect"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 123.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0.92549, 0.596078, 0.0431373, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "The legend of Mora"
+align = 1
+
+[node name="GoldLabel" type="Label" parent="TextureRect"]
+margin_left = 3.0
+margin_top = 13.0
+margin_right = 125.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 44, 5 )
+custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Brackeys 2023 entry by Gad@"
+align = 1
+
+[node name="ContinueButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 38.0
+margin_top = 33.0
+margin_right = 88.0
+margin_bottom = 44.0
+mouse_filter = 1
+text = "Continue"
+disabled = true
+
+[node name="NewGameButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 39.0
+margin_top = 44.0
+margin_right = 87.0
+margin_bottom = 55.0
+mouse_filter = 1
+text = "new game"
+
+[node name="AudioButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 26.0
+margin_top = 54.0
+margin_right = 103.0
+margin_bottom = 65.0
+mouse_filter = 1
+text = "audio   on / off"
+is_toggle = true
+
+[node name="IntroButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 30.0
+margin_top = 64.0
+margin_right = 99.0
+margin_bottom = 75.0
+mouse_filter = 1
+text = "watch   intro"
+
+[node name="QuitButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 48.0
+margin_top = 76.0
+margin_right = 76.0
+margin_bottom = 87.0
+mouse_filter = 1
+text = "quit"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 128.0
+margin_bottom = 92.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/TransionScene = SubResource( 2 )
