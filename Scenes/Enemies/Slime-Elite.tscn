@@ -26,10 +26,10 @@ shader_param/active = false
 
 [node name="Slime-Elite" instance=ExtResource( 2 )]
 health = 15
-weapon = "2d4+3"
+weapon = "2d4+5"
 speed = 2.3
-gold = 10
-xp = 5
+gold = 20
+xp = 15
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

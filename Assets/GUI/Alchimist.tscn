@@ -10,23 +10,33 @@
 text = "alchemist"
 
 [node name="NoMoreLabel" parent="Background" index="1"]
+margin_top = 54.0
+margin_bottom = 64.0
 text = "potion full!"
 
 [node name="Stat1Icon" parent="Background" index="2"]
 texture = ExtResource( 1 )
 
 [node name="Stat1Label" parent="Background" index="3"]
+visible = false
 custom_colors/font_color = Color( 0.898039, 0.317647, 0.0705882, 1 )
 
-[node name="Req1Icon" parent="Background/PurchaseButton" index="0"]
+[node name="Stat1Label2" parent="Background" index="4"]
+visible = false
+
+[node name="PurchaseButton" parent="Background" index="8"]
+margin_top = 47.0
+margin_bottom = 71.0
+
+[node name="Req1Icon" parent="Background/PurchaseButton" index="1"]
 texture = ExtResource( 2 )
 
-[node name="Req1Label" parent="Background/PurchaseButton" index="1"]
+[node name="Req1Label" parent="Background/PurchaseButton" index="2"]
 custom_colors/font_color = Color( 0.898039, 0.317647, 0.0705882, 1 )
 text = "refill"
 
-[node name="PrevItemButton" parent="Background" index="7"]
+[node name="PrevItemButton" parent="Background" index="9"]
 visible = false
 
-[node name="NextItemButton" parent="Background" index="8"]
+[node name="NextItemButton" parent="Background" index="10"]
 visible = false

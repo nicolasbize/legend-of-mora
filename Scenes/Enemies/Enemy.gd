@@ -73,7 +73,7 @@ func get_hurt(dmg):
 		get_owner().add_child(explosion)
 		explosion.position = position
 		call_deferred("queue_free")
-		emit_signal("die", gold, xp)
+		emit_signal("die", gold, xp, is_level_boss)
 
 func on_attack_timer_timeout():
 	prepare_attack()

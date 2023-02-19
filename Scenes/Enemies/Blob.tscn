@@ -28,8 +28,8 @@ shader_param/active = false
 extents = Vector2( 10, 8 )
 
 [node name="BigBlobEnemy" instance=ExtResource( 2 )]
-health = 11
-weapon = "1d5+1"
+health = 14
+weapon = "1d5+2"
 speed = 2.5
 gold = 12
 xp = 8

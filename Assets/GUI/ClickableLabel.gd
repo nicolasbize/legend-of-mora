@@ -11,6 +11,8 @@ export(Color) var hover_color := Color.yellow
 export(bool) var is_toggle := false
 var original_color
 
+onready var click_sound := $ClickSound
+
 func _ready():
 	connect("mouse_entered", self, "on_mouse_enter")
 	connect("mouse_exited", self, "on_mouse_exit")
@@ -32,6 +34,7 @@ func on_mouse_exit():
 func on_mouse_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		emit_signal("pressed")
+		click_sound.play()
 		if not is_toggle:
 			on_mouse_exit()
 	

@@ -25,10 +25,11 @@ shader = SubResource( 2 )
 shader_param/active = false
 
 [node name="Blob-Elite" instance=ExtResource( 2 )]
-weapon = "3d5+4"
+health = 45
+weapon = "4d6+4"
 speed = 2.3
-gold = 22
-xp = 15
+gold = 40
+xp = 25
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

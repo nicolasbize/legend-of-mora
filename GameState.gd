@@ -1,9 +1,9 @@
 extends Node
 
 var nb_days = 1
-var max_lvl_beat = 0 # beat plains => 1, beat forest => 2, etc
+var max_lvl_beat = -1 # beat plains => 1, beat forest => 2, etc
 var prev_level_xp = 0
-var next_level_xp = 30
+var next_level_xp = 20
 var lvl_progression_multiplier = 1.5
 var min_hero_speed = 0.5 # can't attack faster than this
 var max_levels = 15
@@ -20,12 +20,12 @@ var no_weapon := {
 
 var weapons := [{
 	"damage": "1d3",
-	"price": 20,
+	"price": 10,
 	"texture": preload("res://Scenes/Hero/wpn-01-knife.png"),
 	"name": "knife"
 }, {
 	"damage": "1d4",
-	"price": 50,
+	"price": 30,
 	"texture": preload("res://Scenes/Hero/wpn-03-sword.png"),
 	"name": "sword"
 }, {
@@ -99,46 +99,46 @@ var no_armor := {
 
 var armors := [{
 	"effect": 1,
-	"price": 50,
+	"price": 20,
 	"texture": preload("res://Scenes/Hero/armor-01.png"),
 	"name": "buckler"
 }, {
 	"effect": 2,
-	"price": 150,
+	"price": 100,
 	"texture": preload("res://Scenes/Hero/armor-02.png"),
 	"name": "buckler*"
 }, {
-	"effect": 3,
+	"effect": 4,
 	"price": 350,
 	"texture": preload("res://Scenes/Hero/armor-03.png"),
 	"name": "leather"
 }, {
-	"effect": 4,
+	"effect": 7,
 	"price": 800,
 	"texture": preload("res://Scenes/Hero/armor-04.png"),
 	"name": "tower"
 }, {
-	"effect": 5,
+	"effect": 11,
 	"price": 1200,
 	"texture": preload("res://Scenes/Hero/armor-05.png"),
 	"name": "tower*"
 }, {
-	"effect": 6,
+	"effect": 16,
 	"price": 2500,
 	"texture": preload("res://Scenes/Hero/armor-06.png"),
 	"name": "chain mail"
 }, {
-	"effect": 7,
+	"effect": 22,
 	"price": 5000,
 	"texture": preload("res://Scenes/Hero/armor-07.png"),
 	"name": "gold mail"
 }, {
-	"effect": 8,
+	"effect": 29,
 	"price": 10000,
 	"texture": preload("res://Scenes/Hero/armor-08.png"),
 	"name": "plate"
 }, {
-	"effect": 9,
+	"effect": 40,
 	"price": 15000,
 	"texture": preload("res://Scenes/Hero/armor-09.png"),
 	"name": "gold plate"
@@ -146,26 +146,27 @@ var armors := [{
 
 var skills := [{
 	"title": "multicombo",
-	"price": 10,
+	"price": 100,
 	"xp": 1
 }, {
 	"title": "deflect",
-	"price": 2000,
-	"xp": 10
+	"price": 500,
+	"xp": 5
 }, {
 	"title": "berserk",
-	"price": 2000,
-	"xp": 15
+	"price": 1000,
+	"xp": 10
 }]
 
 enum E {None, Slime, Slime2, Slime3, Blob, Blob2, Blob3, Giant, Giant2, Giant3, Gnome, Gnome2, Gnome3, Rat, Rat2, Rat3, Vermin, Vermin2, Vermin3, Warrior, Warrior2, Warrior3, Inferno, Treasure, Event}
 
+#var levels = [[[E.Slime, E.Slime]]]
+
 var levels = [[
 	[E.Slime, E.Slime, E.Slime, E.Slime2],
 	[E.Slime, E.Slime, E.Blob, E.Blob, E.Blob2],
-	[E.Event],
-	[E.Vermin, E.Blob2, E.Blob2],
-	[E.Slime3, E.Treasure],
+	[E.Vermin, E.Slime2, E.Blob2, E.Blob2],
+	[E.Vermin, E.Vermin, E.Slime3],
 	[E.Blob2, E.Blob2, E.Blob3],
 	[E.Vermin2],
 ], [

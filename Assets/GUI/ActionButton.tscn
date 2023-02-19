@@ -172,4 +172,6 @@ anims/Idle = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/Success = SubResource( 5 )
 
+[node name="ActivationTimer" type="Timer" parent="."]
+
 [editable path="ProgressBar"]

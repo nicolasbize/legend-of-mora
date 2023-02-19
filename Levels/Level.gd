@@ -62,8 +62,14 @@ func _ready():
 
 func load_level(nb):
 	var current_x = space_left
-	for row in GameState.levels[nb]:
-		for enemy in row:
+	var is_last_row = false
+	var is_last_enemy = false
+	for row_index in range(GameState.levels[nb].size()):
+		is_last_row = row_index == GameState.levels[nb].size() - 1
+		var row = GameState.levels[nb][row_index]
+		for enemy_index in range(row.size()):
+			is_last_enemy = enemy_index == row.size() - 1
+			var enemy = row[enemy_index]
 			if enemy == GameState.E.Event:
 				pass
 			elif enemy == GameState.E.Treasure:
@@ -73,5 +79,6 @@ func load_level(nb):
 				enemies_node.add_child(instance)
 				instance.set_owner(enemies_node)
 				instance.position = Vector2(current_x, 59)
+				instance.is_level_boss = is_last_row and is_last_enemy
 				current_x += margin_between_enemies
-		current_x += margin_between_enemies * 2
+		current_x += margin_between_enemies

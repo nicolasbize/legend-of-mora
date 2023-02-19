@@ -7,6 +7,7 @@ export(String) var display_name
 export(NodePath) var label_path
 export(bool) var single_click := true
 
+onready var click_sound := $ClickSound
 var label = null
 
 func _ready():
@@ -14,9 +15,13 @@ func _ready():
 		label = get_node(label_path)
 	connect("mouse_entered", self, "on_mouse_enter")
 	connect("mouse_exited", self, "on_mouse_exit")
+	connect("pressed", self, "on_press")
 	if single_click:
 		connect("pressed", self, "on_mouse_exit")
 	
+func on_press():
+	click_sound.play()
+
 func on_mouse_enter():
 	if not disabled:
 		Input.set_custom_mouse_cursor(POINTER_CURSOR)

@@ -35,84 +35,104 @@ align = 1
 
 [node name="NoMoreLabel" type="Label" parent="Background"]
 margin_left = 16.0
-margin_top = 60.0
+margin_top = 45.0
 margin_right = 110.0
-margin_bottom = 70.0
+margin_bottom = 55.0
 custom_colors/font_color = Color( 0.92549, 0.596078, 0.0431373, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "nothing left!"
 align = 1
 
 [node name="Stat1Icon" type="TextureRect" parent="Background"]
-margin_left = 25.0
-margin_top = 30.0
-margin_right = 32.0
-margin_bottom = 37.0
+visible = false
+margin_left = 9.0
+margin_top = 68.0
+margin_right = 16.0
+margin_bottom = 75.0
 texture = ExtResource( 4 )
 stretch_mode = 3
 
 [node name="Stat1Label" type="Label" parent="Background"]
-margin_left = 35.0
-margin_top = 28.0
-margin_right = 92.0
-margin_bottom = 38.0
+margin_left = 21.0
+margin_top = 73.0
+margin_right = 78.0
+margin_bottom = 83.0
 custom_colors/font_color = Color( 0.898039, 0.2, 0.0705882, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "3d4+2 (5-14)"
 
+[node name="Stat1Label2" type="Label" parent="Background"]
+margin_left = 21.0
+margin_top = 65.0
+margin_right = 78.0
+margin_bottom = 75.0
+custom_colors/font_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "equipped:"
+
 [node name="Stat2Icon" type="TextureRect" parent="Background"]
-margin_left = 25.0
-margin_top = 40.0
-margin_right = 32.0
-margin_bottom = 47.0
+margin_left = 79.0
+margin_top = 26.0
+margin_right = 86.0
+margin_bottom = 33.0
 texture = ExtResource( 1 )
 stretch_mode = 3
 
 [node name="Stat2Label" parent="Background" instance=ExtResource( 12 )]
-margin_left = 35.0
-margin_top = 38.0
-margin_right = 86.0
-margin_bottom = 48.0
+margin_left = 88.0
+margin_top = 24.0
+margin_right = 118.0
+margin_bottom = 34.0
+text = "20000"
+
+[node name="Stat2Label2" parent="Background" instance=ExtResource( 12 )]
+margin_left = 30.0
+margin_top = 24.0
+margin_right = 76.0
+margin_bottom = 34.0
+custom_colors/font_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+text = "purse:"
+align = 2
 
 [node name="PurchaseButton" parent="Background" instance=ExtResource( 10 )]
 margin_left = 19.0
-margin_top = 53.0
+margin_top = 38.0
 margin_right = 109.0
-margin_bottom = 77.0
+margin_bottom = 62.0
 texture_normal = ExtResource( 5 )
 texture_disabled = ExtResource( 11 )
 
 [node name="Req1Icon" type="TextureRect" parent="Background/PurchaseButton"]
 margin_left = 6.0
-margin_top = 4.0
+margin_top = 13.0
 margin_right = 13.0
-margin_bottom = 11.0
+margin_bottom = 20.0
 texture = ExtResource( 4 )
 stretch_mode = 3
 
 [node name="Req1Label" type="Label" parent="Background/PurchaseButton"]
 margin_left = 16.0
-margin_top = 1.0
+margin_top = 10.0
 margin_right = 80.0
-margin_bottom = 13.0
-custom_colors/font_color = Color( 0.898039, 0.2, 0.0705882, 1 )
+margin_bottom = 22.0
+custom_colors/font_color = Color( 0.141176, 0.898039, 0.0705882, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "2d6 (2-12)"
 valign = 1
 
 [node name="Req2Icon" type="TextureRect" parent="Background/PurchaseButton"]
 margin_left = 6.0
-margin_top = 13.0
+margin_top = 4.0
 margin_right = 13.0
-margin_bottom = 20.0
+margin_bottom = 11.0
 texture = ExtResource( 1 )
 stretch_mode = 3
 
 [node name="Req2Label" type="Label" parent="Background/PurchaseButton"]
 margin_left = 16.0
-margin_top = 10.0
+margin_top = 1.0
 margin_right = 52.0
-margin_bottom = 22.0
+margin_bottom = 13.0
 custom_colors/font_color = Color( 0.92549, 0.886275, 0.0431373, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "6540"
@@ -140,17 +160,17 @@ valign = 1
 
 [node name="PrevItemButton" parent="Background" instance=ExtResource( 10 )]
 margin_left = 9.0
-margin_top = 58.0
+margin_top = 43.0
 margin_right = 17.0
-margin_bottom = 72.0
+margin_bottom = 57.0
 texture_normal = ExtResource( 8 )
 single_click = false
 
 [node name="NextItemButton" parent="Background" instance=ExtResource( 10 )]
 margin_left = 111.0
-margin_top = 58.0
+margin_top = 43.0
 margin_right = 119.0
-margin_bottom = 72.0
+margin_bottom = 57.0
 texture_normal = ExtResource( 6 )
 single_click = false
 

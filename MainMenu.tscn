@@ -83,9 +83,9 @@ text = "Brackeys 2023 entry by Gad@"
 align = 1
 
 [node name="ContinueButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 38.0
+margin_left = -77.0
 margin_top = 33.0
-margin_right = 88.0
+margin_right = -27.0
 margin_bottom = 44.0
 mouse_filter = 1
 text = "Continue"
@@ -93,34 +93,34 @@ disabled = true
 
 [node name="NewGameButton" parent="TextureRect" instance=ExtResource( 5 )]
 margin_left = 39.0
-margin_top = 44.0
+margin_top = 38.0
 margin_right = 87.0
-margin_bottom = 55.0
+margin_bottom = 49.0
 mouse_filter = 1
 text = "new game"
 
 [node name="AudioButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 26.0
+margin_left = -89.0
 margin_top = 54.0
-margin_right = 103.0
+margin_right = -12.0
 margin_bottom = 65.0
 mouse_filter = 1
 text = "audio   on / off"
 is_toggle = true
 
 [node name="IntroButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 30.0
-margin_top = 64.0
-margin_right = 99.0
-margin_bottom = 75.0
+margin_left = 28.0
+margin_top = 54.0
+margin_right = 97.0
+margin_bottom = 65.0
 mouse_filter = 1
 text = "watch   intro"
 
 [node name="QuitButton" parent="TextureRect" instance=ExtResource( 5 )]
 margin_left = 48.0
-margin_top = 76.0
+margin_top = 70.0
 margin_right = 76.0
-margin_bottom = 87.0
+margin_bottom = 81.0
 mouse_filter = 1
 text = "quit"
 
