@@ -25,11 +25,11 @@ shader = SubResource( 2 )
 shader_param/active = false
 
 [node name="Warrior" instance=ExtResource( 2 )]
-health = 20
+health = 90
 weapon = "4d4+5"
 speed = 2.2
-gold = 65
-xp = 60
+gold = 655
+xp = 328
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

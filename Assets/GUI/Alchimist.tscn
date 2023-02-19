@@ -24,19 +24,24 @@ custom_colors/font_color = Color( 0.898039, 0.317647, 0.0705882, 1 )
 [node name="Stat1Label2" parent="Background" index="4"]
 visible = false
 
-[node name="PurchaseButton" parent="Background" index="8"]
+[node name="PurchaseButton" parent="Background" index="9"]
 margin_top = 47.0
 margin_bottom = 71.0
 
 [node name="Req1Icon" parent="Background/PurchaseButton" index="1"]
+margin_left = 9.0
+margin_top = 8.0
+margin_right = 16.0
+margin_bottom = 15.0
 texture = ExtResource( 2 )
 
 [node name="Req1Label" parent="Background/PurchaseButton" index="2"]
+margin_left = 19.0
+margin_top = 5.0
+margin_right = 83.0
+margin_bottom = 17.0
 custom_colors/font_color = Color( 0.898039, 0.317647, 0.0705882, 1 )
 text = "refill"
 
-[node name="PrevItemButton" parent="Background" index="9"]
-visible = false
-
-[node name="NextItemButton" parent="Background" index="10"]
+[node name="ItemLabel" parent="Background/PurchaseButton" index="7"]
 visible = false

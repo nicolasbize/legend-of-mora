@@ -10,45 +10,61 @@ shop_type = 3
 text = "library"
 
 [node name="NoMoreLabel" parent="Background" index="1"]
-margin_top = 51.0
-margin_bottom = 61.0
+margin_top = 64.0
+margin_bottom = 74.0
 
 [node name="Stat1Icon" parent="Background" index="2"]
 texture = ExtResource( 2 )
 
 [node name="Stat1Label" parent="Background" index="3"]
 visible = false
-custom_colors/font_color = Color( 0.192157, 0.866667, 0.0705882, 1 )
+margin_top = 46.0
+margin_bottom = 56.0
+custom_colors/font_color = Color( 0.74902, 0.74902, 0.74902, 1 )
+text = "upgrade:"
 
 [node name="Stat1Label2" parent="Background" index="4"]
-visible = false
+margin_left = 88.0
+margin_top = 34.0
+margin_right = 118.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0.192157, 0.866667, 0.0705882, 1 )
+text = "12"
 
-[node name="PurchaseButton" parent="Background" index="8"]
-margin_top = 44.0
-margin_bottom = 68.0
+[node name="Stat2Label3" parent="Background" index="8"]
+text = "Level:"
+
+[node name="PurchaseButton" parent="Background" index="9"]
+margin_top = 56.0
+margin_bottom = 80.0
 
 [node name="Req1Icon" parent="Background/PurchaseButton" index="1"]
-visible = false
+margin_left = 60.0
+margin_top = -20.0
+margin_right = 67.0
+margin_bottom = -13.0
+texture = ExtResource( 2 )
 
 [node name="Req1Label" parent="Background/PurchaseButton" index="2"]
+visible = false
 custom_colors/font_color = Color( 0.898039, 0.627451, 0.0705882, 1 )
+
+[node name="Req2Icon" parent="Background/PurchaseButton" index="3"]
+margin_left = 6.0
+margin_top = 13.0
+margin_right = 13.0
+margin_bottom = 20.0
+
+[node name="Req2Label" parent="Background/PurchaseButton" index="4"]
+margin_left = 16.0
+margin_top = 10.0
+margin_right = 52.0
+margin_bottom = 22.0
 
 [node name="Req3Icon" parent="Background/PurchaseButton" index="5"]
 visible = true
-margin_top = 4.0
-margin_bottom = 11.0
 texture = ExtResource( 2 )
 
 [node name="Req3Label" parent="Background/PurchaseButton" index="6"]
 visible = true
-margin_top = 1.0
-margin_bottom = 13.0
 custom_colors/font_color = Color( 0.192157, 0.866667, 0.0705882, 1 )
-
-[node name="PrevItemButton" parent="Background" index="9"]
-margin_top = 49.0
-margin_bottom = 63.0
-
-[node name="NextItemButton" parent="Background" index="10"]
-margin_top = 49.0
-margin_bottom = 63.0

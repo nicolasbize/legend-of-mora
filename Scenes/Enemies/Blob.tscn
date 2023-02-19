@@ -31,8 +31,8 @@ extents = Vector2( 10, 8 )
 health = 14
 weapon = "1d5+2"
 speed = 2.5
-gold = 12
-xp = 8
+gold = 28
+xp = 14
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

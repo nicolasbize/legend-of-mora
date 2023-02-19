@@ -183,7 +183,7 @@ func finish_dying_animation():
 	emit_signal("death")
 
 func get_hurt(dmg):
-	var damage = DiceHelper.roll(dmg) - armor.effect
+	var damage = max(DiceHelper.roll(dmg) - armor.effect, 0)
 	if ignore_next_attack:
 		ignore_next_attack = false
 		battle_indicator.block()
@@ -262,6 +262,6 @@ func purchase_potion():
 
 func purchase_skill(index):
 	gold -= GameState.skills[index].price
-	emit_signal("gold_change", gold)	
+	GameState.skills = GameState.skills.slice(index + 1, GameState.skills.size() - 1)
+	emit_signal("gold_change", gold)
 	skills.append(GameState.skills[index].title)
-	GameState.skills = GameState.skills.slice(0, index) + GameState.skills.slice(index + 1, GameState.skills.size() - 1)

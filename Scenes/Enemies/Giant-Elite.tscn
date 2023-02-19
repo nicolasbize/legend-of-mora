@@ -28,8 +28,8 @@ shader_param/active = false
 health = 80
 weapon = "3d10+6"
 speed = 2.5
-gold = 120
-xp = 70
+gold = 720
+xp = 360
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

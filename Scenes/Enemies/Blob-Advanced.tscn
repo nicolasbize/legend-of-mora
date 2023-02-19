@@ -26,10 +26,10 @@ shader_param/active = false
 
 [node name="Blob-Advanced" instance=ExtResource( 2 )]
 health = 22
-weapon = "3d5+4"
-speed = 2.4
-gold = 12
-xp = 22
+weapon = "2d8+2"
+speed = 3.0
+gold = 81
+xp = 41
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

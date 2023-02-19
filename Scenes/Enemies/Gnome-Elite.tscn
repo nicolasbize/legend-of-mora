@@ -25,11 +25,11 @@ shader = SubResource( 2 )
 shader_param/active = false
 
 [node name="Gnome-Elite" instance=ExtResource( 2 )]
-health = 70
+health = 66
 weapon = "2d8+10"
 speed = 2.3
-gold = 180
-xp = 70
+gold = 545
+xp = 273
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

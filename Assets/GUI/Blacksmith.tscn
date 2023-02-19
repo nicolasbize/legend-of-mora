@@ -1,17 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/GUI/coin-icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Fonts/game_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/GUI/town-bg.png" type="Texture" id=3]
 [ext_resource path="res://Assets/GUI/sword-icon.png" type="Texture" id=4]
 [ext_resource path="res://Assets/GUI/btn-purchase.png" type="Texture" id=5]
-[ext_resource path="res://Assets/GUI/arrow-right.png" type="Texture" id=6]
 [ext_resource path="res://Assets/GUI/close-btn.png" type="Texture" id=7]
-[ext_resource path="res://Assets/GUI/arrow-left.png" type="Texture" id=8]
 [ext_resource path="res://Assets/GUI/Blacksmith.gd" type="Script" id=9]
 [ext_resource path="res://Assets/GUI/TownButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/GUI/btn-purchase-disabled.png" type="Texture" id=11]
 [ext_resource path="res://Assets/GUI/ProgressiveLabel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/GUI/btn-purchase-hover.png" type="Texture" id=13]
 
 [node name="Shop" type="Control"]
 anchor_right = 1.0
@@ -35,9 +34,9 @@ align = 1
 
 [node name="NoMoreLabel" type="Label" parent="Background"]
 margin_left = 16.0
-margin_top = 45.0
+margin_top = 55.0
 margin_right = 110.0
-margin_bottom = 55.0
+margin_bottom = 65.0
 custom_colors/font_color = Color( 0.92549, 0.596078, 0.0431373, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "nothing left!"
@@ -53,22 +52,22 @@ texture = ExtResource( 4 )
 stretch_mode = 3
 
 [node name="Stat1Label" type="Label" parent="Background"]
-margin_left = 21.0
+margin_left = 68.0
 margin_top = 73.0
-margin_right = 78.0
+margin_right = 109.0
 margin_bottom = 83.0
 custom_colors/font_color = Color( 0.898039, 0.2, 0.0705882, 1 )
 custom_fonts/font = ExtResource( 2 )
-text = "3d4+2 (5-14)"
+text = "5-14"
 
 [node name="Stat1Label2" type="Label" parent="Background"]
 margin_left = 21.0
-margin_top = 65.0
-margin_right = 78.0
-margin_bottom = 75.0
+margin_top = 73.0
+margin_right = 68.0
+margin_bottom = 83.0
 custom_colors/font_color = Color( 0.905882, 0.905882, 0.905882, 1 )
 custom_fonts/font = ExtResource( 2 )
-text = "equipped:"
+text = "current:"
 
 [node name="Stat2Icon" type="TextureRect" parent="Background"]
 margin_left = 79.0
@@ -94,12 +93,22 @@ custom_colors/font_color = Color( 0.905882, 0.905882, 0.905882, 1 )
 text = "purse:"
 align = 2
 
+[node name="Stat2Label3" parent="Background" instance=ExtResource( 12 )]
+margin_left = 30.0
+margin_top = 34.0
+margin_right = 76.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+text = "cost:"
+align = 2
+
 [node name="PurchaseButton" parent="Background" instance=ExtResource( 10 )]
 margin_left = 19.0
-margin_top = 38.0
+margin_top = 48.0
 margin_right = 109.0
-margin_bottom = 62.0
+margin_bottom = 72.0
 texture_normal = ExtResource( 5 )
+texture_hover = ExtResource( 13 )
 texture_disabled = ExtResource( 11 )
 
 [node name="Req1Icon" type="TextureRect" parent="Background/PurchaseButton"]
@@ -121,18 +130,18 @@ text = "2d6 (2-12)"
 valign = 1
 
 [node name="Req2Icon" type="TextureRect" parent="Background/PurchaseButton"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 13.0
-margin_bottom = 11.0
+margin_left = 60.0
+margin_top = -12.0
+margin_right = 67.0
+margin_bottom = -5.0
 texture = ExtResource( 1 )
 stretch_mode = 3
 
 [node name="Req2Label" type="Label" parent="Background/PurchaseButton"]
-margin_left = 16.0
-margin_top = 1.0
-margin_right = 52.0
-margin_bottom = 13.0
+margin_left = 70.0
+margin_top = -15.0
+margin_right = 106.0
+margin_bottom = -3.0
 custom_colors/font_color = Color( 0.92549, 0.886275, 0.0431373, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "6540"
@@ -158,21 +167,14 @@ custom_fonts/font = ExtResource( 2 )
 text = "6540"
 valign = 1
 
-[node name="PrevItemButton" parent="Background" instance=ExtResource( 10 )]
-margin_left = 9.0
-margin_top = 43.0
-margin_right = 17.0
-margin_bottom = 57.0
-texture_normal = ExtResource( 8 )
-single_click = false
-
-[node name="NextItemButton" parent="Background" instance=ExtResource( 10 )]
-margin_left = 111.0
-margin_top = 43.0
-margin_right = 119.0
-margin_bottom = 57.0
-texture_normal = ExtResource( 6 )
-single_click = false
+[node name="ItemLabel" type="Label" parent="Background/PurchaseButton"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 84.0
+margin_bottom = 12.0
+custom_colors/font_color = Color( 0.92549, 0.596078, 0.0431373, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "blacksmith"
 
 [node name="ReturnButton" parent="Background" instance=ExtResource( 10 )]
 margin_left = 108.0

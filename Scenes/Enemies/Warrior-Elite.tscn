@@ -26,10 +26,10 @@ shader_param/active = false
 
 [node name="Warrior-Elite" instance=ExtResource( 2 )]
 health = 50
-weapon = "5d5+5"
+weapon = "5d5+7"
 speed = 2.2
-gold = 140
-xp = 120
+gold = 1000
+xp = 500
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

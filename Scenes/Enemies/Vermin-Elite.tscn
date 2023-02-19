@@ -25,10 +25,10 @@ shader = SubResource( 2 )
 shader_param/active = false
 
 [node name="Vermin-Elite" instance=ExtResource( 2 )]
-health = 50
-weapon = "3d8+6"
-gold = 120
-xp = 80
+health = 45
+weapon = "3d5+4"
+gold = 293
+xp = 147
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )

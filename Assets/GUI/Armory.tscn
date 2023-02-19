@@ -9,24 +9,8 @@ shop_type = 1
 [node name="ShopLabel" parent="Background" index="0"]
 text = "armory"
 
-[node name="NoMoreLabel" parent="Background" index="1"]
-margin_top = 45.0
-margin_bottom = 55.0
-
 [node name="Stat1Icon" parent="Background" index="2"]
 texture = ExtResource( 2 )
 
-[node name="PurchaseButton" parent="Background" index="8"]
-margin_top = 38.0
-margin_bottom = 62.0
-
 [node name="Req1Icon" parent="Background/PurchaseButton" index="1"]
 texture = ExtResource( 2 )
-
-[node name="PrevItemButton" parent="Background" index="9"]
-margin_top = 43.0
-margin_bottom = 57.0
-
-[node name="NextItemButton" parent="Background" index="10"]
-margin_top = 43.0
-margin_bottom = 57.0

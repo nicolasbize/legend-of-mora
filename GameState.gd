@@ -4,7 +4,7 @@ var nb_days = 1
 var max_lvl_beat = -1 # beat plains => 1, beat forest => 2, etc
 var prev_level_xp = 0
 var next_level_xp = 20
-var lvl_progression_multiplier = 1.5
+var lvl_progression_multiplier = 1.4
 var min_hero_speed = 0.5 # can't attack faster than this
 var max_levels = 15
 var berserk_quota = 0.25 # below 25% max_health, go berserk if you have the skill
@@ -57,37 +57,37 @@ var weapons := [{
 	"damage": "3d6",
 	"texture": preload("res://Scenes/Hero/wpn-02-knife.png"),
 	"price": 1250,
-	"name": "knife*"
+	"name": "knife+"
 }, {
 	"damage": "3d8",
 	"texture": preload("res://Scenes/Hero/wpn-04-sword.png"),
 	"price": 2000,
-	"name": "sword*"
+	"name": "sword+"
 }, {
 	"damage": "4d6",
 	"texture": preload("res://Scenes/Hero/wpn-06-falshion.png"),
 	"price": 3000,
-	"name": "falshion*"
+	"name": "falshion+"
 }, {
 	"damage": "4d8",
 	"texture": preload("res://Scenes/Hero/wpn-08-axe.png"),
 	"price": 4500,
-	"name": "axe*"
+	"name": "axe+"
 }, {
 	"damage": "6d6",
 	"texture": preload("res://Scenes/Hero/wpn-09-flail.png"),
 	"price": 7000,
-	"name": "flail*"
+	"name": "flail+"
 }, {
 	"damage": "8d6",
 	"texture": preload("res://Scenes/Hero/wpn-11-pole.png"),
 	"price": 11000,
-	"name": "pole*"
+	"name": "pole+"
 }, {
 	"damage": "8d8",
 	"price": 15000,
 	"texture": preload("res://Scenes/Hero/wpn-13-longsword.png"),
-	"name": "longsword*"
+	"name": "longsword+"
 }]
 
 var no_armor := {
@@ -106,7 +106,7 @@ var armors := [{
 	"effect": 2,
 	"price": 100,
 	"texture": preload("res://Scenes/Hero/armor-02.png"),
-	"name": "buckler*"
+	"name": "targe"
 }, {
 	"effect": 4,
 	"price": 350,
@@ -121,7 +121,7 @@ var armors := [{
 	"effect": 11,
 	"price": 1200,
 	"texture": preload("res://Scenes/Hero/armor-05.png"),
-	"name": "tower*"
+	"name": "aegis"
 }, {
 	"effect": 16,
 	"price": 2500,
@@ -163,37 +163,31 @@ enum E {None, Slime, Slime2, Slime3, Blob, Blob2, Blob3, Giant, Giant2, Giant3, 
 #var levels = [[[E.Slime, E.Slime]]]
 
 var levels = [[
-	[E.Slime, E.Slime, E.Slime, E.Slime2],
-	[E.Slime, E.Slime, E.Blob, E.Blob, E.Blob2],
-	[E.Vermin, E.Slime2, E.Blob2, E.Blob2],
-	[E.Vermin, E.Vermin, E.Slime3],
-	[E.Blob2, E.Blob2, E.Blob3],
-	[E.Vermin2],
+	[E.Slime, E.Slime, E.Slime2],
+	[E.Slime2, E.Blob, E.Slime3],
+	[E.Slime2, E.Blob, E.Blob2],
+	[E.Vermin, E.Slime3, E.Slime3],
+	[E.Blob2, E.Vermin, E.Blob3],
 ], [
-	[E.Vermin2, E.Vermin2, E.Vermin3],
-	[E.Slime3, E.Slime3, E.Blob3],
-	[E.Event],
-	[E.Blob3, E.Blob3, E.Rat, E.Rat],
-	[E.Treasure],
-	[E.Rat2, E.Vermin3, E.Rat2],
-	[E.Warrior, E.Rat2, E.Rat3]
+	[E.Vermin, E.Blob3, E.Vermin2],
+	[E.Blob3, E.Vermin2, E.Blob3],
+	[E.Vermin, E.Vermin2, E.Rat],
+	[E.Rat, E.Vermin3, E.Vermin3],
+	[E.Rat, E.Rat2, E.Gnome]
 ], [
-	[E.Rat3, E.Rat3, E.Vermin3],
-	[E.Warrior, E.Warrior2, E.Warrior2],
-	[E.Event],
-	[E.Gnome, E.Gnome, E.Gnome, E.Gnome2],
-	[E.Treasure],
-	[E.Blob3, E.Warrior3, E.Giant],
-	[E.Gnome2, E.Gnome2, E.Giant, E.Gnome3],
-	[E.Giant2]
+	[E.Gnome, E.Rat3, E.Gnome2],
+	[E.Giant, E.Gnome3, E.Giant],
+	[E.Gnome3, E.Giant2, E.Warrior],
+	[E.Warrior, E.Gnome3, E.Giant3],
+	[E.Warrior2, E.Warrior2, E.Warrior3]
 ], [
 	[E.Slime3, E.Slime3, E.Slime3],
 	[E.Blob3, E.Blob3, E.Blob3],
 	[E.Vermin3, E.Vermin3, E.Vermin3],
 	[E.Rat3, E.Rat3, E.Rat3],
-	[E.Warrior3, E.Warrior3, E.Warrior3],
 	[E.Gnome3, E.Gnome3, E.Gnome3],
 	[E.Giant3, E.Giant3, E.Giant3],
+	[E.Warrior3, E.Warrior3, E.Warrior3],
 	[], [],
 	[E.Inferno]
 ]]

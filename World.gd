@@ -15,6 +15,7 @@ onready var gold_label = $"Game UI/Topbar/GoldLabel"
 onready var xp_bar := $"Game UI/Topbar/XPBar"
 onready var main_music := $MainMusic
 onready var upgrade_sound := $UpgradeSound
+onready var battle_indicator := $"Game UI/BattleIndicator"
 
 var current_level_index := 0
 
@@ -26,23 +27,25 @@ func _ready():
 	hero.connect("xp_change", self, "on_hero_xp_change")
 	hero.connect("level_complete", self, "on_hero_level_complete")
 	level_up.connect("level_up", self, "on_hero_level_up")
-	set_test_data()
+#	set_test_data()
 	gold_label.set_value(hero.gold)
 	xp_bar.set_value(0, GameState.next_level_xp)
 	start_level(current_level_index)
 
 func set_test_data():
-	hero.gold = 1000
-	hero.purchase_weapon(4)
-	hero.purchase_armor(2)
-	hero.skills = ["multicombo"]
-	hero.xp_level = 6
-	hero.max_health = 25
-	hero.strength = 3
-	hero.vitality = 3
-	hero.agility = 2
-	current_level_index = 1
-	GameState.next_level_xp = 101
+	hero.gold = 150
+#	hero.gold = 1000
+#	hero.purchase_weapon(4)
+#	hero.purchase_armor(2)
+#	hero.skills = ["multicombo"]
+#	hero.xp_level = 6
+#	hero.max_health = 25
+#	hero.strength = 3
+#	hero.vitality = 3
+#	hero.agility = 2
+#	current_level_index = 1
+#	GameState.max_lvl_beat = 0
+#	GameState.next_level_xp = 230
 
 func on_load_level(lvl_nb):
 	start_level(lvl_nb)
@@ -62,6 +65,7 @@ func start_level(lvl_nb):
 		main_music.play()
 
 func on_hero_level_complete():
+	battle_indicator.reset()
 	if GameState.max_lvl_beat < current_level_index:
 		GameState.max_lvl_beat = current_level_index
 	if GameState.max_lvl_beat < GameState.levels.size() - 1:

@@ -25,11 +25,11 @@ shader = SubResource( 2 )
 shader_param/active = false
 
 [node name="Rat-Advanced" instance=ExtResource( 2 )]
-health = 45
-weapon = "3d8+4"
-speed = 2.1
-gold = 160
-xp = 135
+health = 55
+weapon = "3d7+2"
+speed = 2.4
+gold = 321
+xp = 161
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )
