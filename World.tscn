@@ -1618,6 +1618,18 @@ tracks/25/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/26/type = "value"
+tracks/26/path = NodePath("Game UI/BattleIndicator:visible")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "StartLevel"
@@ -1706,6 +1718,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [ -10.0 ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Game UI/BattleIndicator:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "StartLevelUp"
@@ -1781,7 +1805,7 @@ mouse_filter = 2
 [node name="TextureRect" type="TextureRect" parent="Game UI/Transition"]
 visible = false
 margin_left = -190.0
-margin_right = 315.0
+margin_right = 475.0
 margin_bottom = 92.0
 texture = ExtResource( 10 )
 

@@ -61,31 +61,31 @@ var weapons := [{
 }, {
 	"damage": "3d8",
 	"texture": preload("res://Scenes/Hero/wpn-04-sword.png"),
-	"price": 2000,
+	"price": 1400,
 	"name": "sword+"
 }, {
 	"damage": "4d6",
 	"texture": preload("res://Scenes/Hero/wpn-06-falshion.png"),
-	"price": 3000,
+	"price": 1700,
 	"name": "falshion+"
 }, {
 	"damage": "4d8",
 	"texture": preload("res://Scenes/Hero/wpn-08-axe.png"),
-	"price": 4500,
+	"price": 2000,
 	"name": "axe+"
 }, {
 	"damage": "6d6",
 	"texture": preload("res://Scenes/Hero/wpn-09-flail.png"),
-	"price": 7000,
+	"price": 2500,
 	"name": "flail+"
 }, {
 	"damage": "8d6",
 	"texture": preload("res://Scenes/Hero/wpn-11-pole.png"),
-	"price": 11000,
+	"price": 3000,
 	"name": "pole+"
 }, {
 	"damage": "8d8",
-	"price": 15000,
+	"price": 3500,
 	"texture": preload("res://Scenes/Hero/wpn-13-longsword.png"),
 	"name": "longsword+"
 }]
@@ -124,22 +124,22 @@ var armors := [{
 	"name": "aegis"
 }, {
 	"effect": 16,
-	"price": 2500,
+	"price": 1600,
 	"texture": preload("res://Scenes/Hero/armor-06.png"),
 	"name": "chain mail"
 }, {
 	"effect": 22,
-	"price": 5000,
+	"price": 2000,
 	"texture": preload("res://Scenes/Hero/armor-07.png"),
 	"name": "gold mail"
 }, {
 	"effect": 29,
-	"price": 10000,
+	"price": 2500,
 	"texture": preload("res://Scenes/Hero/armor-08.png"),
 	"name": "plate"
 }, {
 	"effect": 40,
-	"price": 15000,
+	"price": 3500,
 	"texture": preload("res://Scenes/Hero/armor-09.png"),
 	"name": "gold plate"
 }]

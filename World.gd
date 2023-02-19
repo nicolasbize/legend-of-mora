@@ -33,19 +33,18 @@ func _ready():
 	start_level(current_level_index)
 
 func set_test_data():
-	hero.gold = 150
-#	hero.gold = 1000
-#	hero.purchase_weapon(4)
-#	hero.purchase_armor(2)
-#	hero.skills = ["multicombo"]
-#	hero.xp_level = 6
-#	hero.max_health = 25
-#	hero.strength = 3
-#	hero.vitality = 3
-#	hero.agility = 2
-#	current_level_index = 1
-#	GameState.max_lvl_beat = 0
-#	GameState.next_level_xp = 230
+	hero.gold = 7586
+	hero.purchase_weapon(10)
+	hero.purchase_armor(6)
+	hero.skills = ["multicombo"]
+	hero.xp_level = 6
+	hero.max_health = 25
+	hero.strength = 3
+	hero.vitality = 3
+	hero.agility = 2
+	current_level_index = 2
+	GameState.max_lvl_beat = 0
+	GameState.next_level_xp = 230
 
 func on_load_level(lvl_nb):
 	start_level(lvl_nb)

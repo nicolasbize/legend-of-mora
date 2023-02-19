@@ -12,7 +12,7 @@ export(int) var strength := 1 # attack strength
 export(int) var agility := 1 # attack + defend speed
 export(int) var vitality := 1 # hit points
 
-export(float) var base_speed := 2100 # millis between each attack
+export(float) var base_speed := 600 # millis between each attack
 export(int) var max_health := 10
 export(int) var health := max_health
 export(bool) var has_potion := false
@@ -26,7 +26,7 @@ var armor := GameState.no_armor
 var velocity := Vector2.ZERO
 var movement_acceleration := 400
 var max_movement_speed := 50
-var movement_friction := 800
+var movement_friction := 1000
 var current_combo_amount := 0
 
 enum state {IDLE, MOVING, ACTIVE, ATTACK, DEFENSE, DYING, DEAD}
@@ -89,11 +89,11 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.RIGHT * max_movement_speed, movement_acceleration * delta)
 		state.ATTACK:
 			animation_player.play("Attack")
-			if current_enemy != null:
+			if current_enemy != null and is_instance_valid(current_enemy):
 				velocity = velocity.move_toward(Vector2.ZERO, movement_friction * delta)
 		state.DEFENSE:
 			animation_player.play("Block")
-			if current_enemy != null:
+			if current_enemy != null and is_instance_valid(current_enemy):
 				velocity = velocity.move_toward(Vector2.ZERO, movement_friction * delta)
 		state.DYING:
 			animation_player.play("Die")
@@ -128,6 +128,7 @@ func on_attack_press():
 			current_combo_amount += 1
 		current_state = state.ATTACK
 		attack_button.disable_for(get_attack_speed(), skills.has("multicombo"))
+		defend_button.disable_for(get_attack_speed())
 
 func on_defend_press():
 	if health > 0:
@@ -136,9 +137,10 @@ func on_defend_press():
 			current_state = state.DEFENSE
 		else:
 			defend_button.disable_for(get_attack_speed())
+			attack_button.disable_for(get_attack_speed())
 
 func get_attack_speed():
-	return base_speed - 100 * agility
+	return base_speed - 20 * agility
 
 func on_potion_press():
 	if health < max_health:
@@ -166,14 +168,14 @@ func perform_attack():
 
 func finish_attack_animation():
 	current_state = state.IDLE
-	if current_enemy == null:
+	if current_enemy == null or not is_instance_valid(current_enemy):
 		if not finished_level:
 			yield(get_tree().create_timer(0.3), "timeout")
 			current_state = state.MOVING
 
 func finish_defend_animation():
 	current_state = state.IDLE
-	if current_enemy == null:
+	if current_enemy == null or not is_instance_valid(current_enemy):
 		if not finished_level:
 			yield(get_tree().create_timer(0.3), "timeout")
 			current_state = state.MOVING
@@ -262,6 +264,7 @@ func purchase_potion():
 
 func purchase_skill(index):
 	gold -= GameState.skills[index].price
+	skills.append(GameState.skills[index].title)
 	GameState.skills = GameState.skills.slice(index + 1, GameState.skills.size() - 1)
 	emit_signal("gold_change", gold)
-	skills.append(GameState.skills[index].title)
+	
