@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/FX/white-dot.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="Gradient" id=14]
+interpolation_mode = 2
+colors = PoolColorArray( 1, 1, 1, 1, 0.907764, 0.92398, 0.0531787, 1 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3( 5, -5, 0 )
+spread = 34.05
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 45.0
+initial_velocity_random = 0.42
+color_ramp = SubResource( 15 )
+
+[node name="Sparks" type="Particles2D"]
+material = SubResource( 1 )
+emitting = false
+amount = 35
+one_shot = true
+explosiveness = 0.98
+randomness = 0.2
+process_material = SubResource( 4 )
+texture = ExtResource( 1 )

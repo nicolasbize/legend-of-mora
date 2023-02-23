@@ -4,6 +4,7 @@ export(NodePath) var potion_button_path = null
 export(NodePath) var defend_button_path = null
 export(NodePath) var attack_button_path = null
 export(NodePath) var battle_indicator_path = null
+export(NodePath) var camera_path = null
 
 export(int) var xp := 0
 export(int) var xp_level := 1
@@ -32,6 +33,7 @@ var current_combo_amount := 0
 enum state {IDLE, MOVING, ACTIVE, ATTACK, DEFENSE, DYING, DEAD}
 var current_state = state.IDLE
 
+var camera = null
 var current_enemy = null
 var potion_button = null
 var defend_button = null
@@ -47,12 +49,14 @@ onready var hero_sprite := $HeroSprite
 onready var hit_area := $HitArea
 onready var weapon_sprite := $WeaponSprite
 onready var armor_sprite := $ArmorSprite
-
+onready var sparks := $Sparks
+onready var remote_transform := $RemoteTransform2D
 onready var block_sound := $BlockSound
 onready var hit_sound := $HitSound
 onready var hurt_sound := $HurtSound
 onready var kill_sound := $KillSound
 onready var upgrade_sound := $UpgradeSound
+
 
 const DamageIndicator = preload("res://Assets/FX/DamageIndicator.tscn")
 const HeroTexture = preload("res://Scenes/Hero/hero.png")
@@ -70,6 +74,7 @@ func _ready():
 	defend_button = get_node(defend_button_path)
 	attack_button = get_node(attack_button_path)
 	battle_indicator = get_node(battle_indicator_path)
+	camera = get_node(camera_path)
 	attack_button.connect("pressed", self, "on_attack_press")
 	potion_button.connect("pressed", self, "on_potion_press")
 	defend_button.connect("pressed", self, "on_defend_press")
@@ -123,11 +128,12 @@ func prepare_defense():
 	
 func on_attack_press():
 	if health > 0:
-		if attack_button.is_activated:
+		if combo_next_attack == false:
 			combo_next_attack = true
+		else:
 			current_combo_amount += 1
 		current_state = state.ATTACK
-		attack_button.disable_for(get_attack_speed(), skills.has("multicombo"))
+		attack_button.disable_for(get_attack_speed())
 		defend_button.disable_for(get_attack_speed())
 
 func on_defend_press():
@@ -158,10 +164,9 @@ func perform_attack():
 		var dmg = DiceHelper.roll(weapon.damage + "+" + str(strength))
 		if is_berserked():
 			dmg *= GameState.berserk_dmg_multiplier
-		if combo_next_attack:
-			dmg *= (GameState.combo_dmg_multiplier + current_combo_amount as float / 10.0)
-			combo_next_attack = false
-			battle_indicator.combo()
+		if skills.has("multicombo") and current_combo_amount > 0:
+			dmg *= (GameState.combo_dmg_multiplier + current_combo_amount as float / 5.0)
+			battle_indicator.combo(current_combo_amount + 1)
 		dmg = round(dmg)
 		current_enemy.emit_signal("hit", dmg)
 		hit_sound.play()
@@ -169,9 +174,9 @@ func perform_attack():
 func finish_attack_animation():
 	current_state = state.IDLE
 	if current_enemy == null or not is_instance_valid(current_enemy):
-		if not finished_level:
-			yield(get_tree().create_timer(0.3), "timeout")
-			current_state = state.MOVING
+		var timer_transition = finished_level and 2 or 0.3
+		yield(get_tree().create_timer(timer_transition), "timeout")
+		current_state = state.MOVING
 
 func finish_defend_animation():
 	current_state = state.IDLE
@@ -197,8 +202,11 @@ func get_hurt(dmg):
 			damage = 0
 		else:
 			hurt_animation_player.play("Hurt")
-			if defend_button.disabled:
-				battle_indicator.miss()
+			sparks.restart()
+			sparks.amount = damage
+			sparks.emitting = true
+			battle_indicator.reset()
+			
 		var dmg_indicator = DamageIndicator.instance()
 		get_owner().add_child(dmg_indicator)
 		dmg_indicator.set_text(str(damage))
@@ -208,11 +216,12 @@ func get_hurt(dmg):
 		health -= damage
 		hurt_sound.play()
 		emit_signal("health_change", health)
+		camera.shake(0.2, 1)
 		if health <= 0:
 			process_death()
 	
 func get_potion_price():
-	return vitality * 10
+	return vitality * vitality * 10
 	
 func process_death():
 	health = 0
@@ -223,7 +232,8 @@ func process_death():
 	defend_button.disabled = true
 	attack_button.cancel_activation()
 	defend_button.cancel_activation()
-	potion_button.cancel_activation()	
+	potion_button.cancel_activation()
+	battle_indicator.reset()
 
 func enemy_death(gold_award, xp_award, is_boss):
 	current_enemy = null
@@ -233,9 +243,13 @@ func enemy_death(gold_award, xp_award, is_boss):
 	emit_signal("gold_change", gold)
 	emit_signal("xp_change", xp)
 	attack_button.cancel_activation()
+	current_combo_amount = 0
+	battle_indicator.reset()
 	kill_sound.play()
+	battle_indicator.reset()
 	if is_boss:
 		finished_level = true
+		remote_transform.remote_path = ""
 		yield(get_tree().create_timer(3), "timeout")
 		emit_signal("level_complete")
 

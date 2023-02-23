@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/GUI/TownButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/GUI/btn-boss.png" type="Texture" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://Assets/GUI/btn-mountains-disabled.png" type="Texture" id=7]
 [ext_resource path="res://Assets/GUI/btn-boss-disabled.png" type="Texture" id=8]
 [ext_resource path="res://Assets/GUI/btn-forest-disabled.png" type="Texture" id=9]
+[ext_resource path="res://Assets/GUI/btn-forest-hover.png" type="Texture" id=10]
+[ext_resource path="res://Assets/GUI/btn-plains-hover.png" type="Texture" id=11]
+[ext_resource path="res://Assets/GUI/btn-mountains-hover.png" type="Texture" id=12]
+[ext_resource path="res://Assets/GUI/btn-boss-hover.png" type="Texture" id=13]
 
 [node name="LevelPicker" type="Control"]
 anchor_right = 1.0
@@ -21,6 +25,7 @@ margin_top = 4.0
 margin_right = 63.0
 margin_bottom = 44.0
 texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 11 )
 
 [node name="ButtonForest" parent="." instance=ExtResource( 1 )]
 margin_left = 66.0
@@ -28,6 +33,7 @@ margin_top = 4.0
 margin_right = 126.0
 margin_bottom = 44.0
 texture_normal = ExtResource( 5 )
+texture_hover = ExtResource( 10 )
 texture_disabled = ExtResource( 9 )
 
 [node name="ButtonMountain" parent="." instance=ExtResource( 1 )]
@@ -36,6 +42,7 @@ margin_top = 48.0
 margin_right = 63.0
 margin_bottom = 88.0
 texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 12 )
 texture_disabled = ExtResource( 7 )
 
 [node name="ButtonBoss" parent="." instance=ExtResource( 1 )]
@@ -44,4 +51,5 @@ margin_top = 48.0
 margin_right = 126.0
 margin_bottom = 88.0
 texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 13 )
 texture_disabled = ExtResource( 8 )

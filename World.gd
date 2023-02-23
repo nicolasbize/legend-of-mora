@@ -16,6 +16,7 @@ onready var xp_bar := $"Game UI/Topbar/XPBar"
 onready var main_music := $MainMusic
 onready var upgrade_sound := $UpgradeSound
 onready var battle_indicator := $"Game UI/BattleIndicator"
+onready var camera := $Camera2D
 
 var current_level_index := 0
 
@@ -34,15 +35,15 @@ func _ready():
 
 func set_test_data():
 	hero.gold = 7586
-	hero.purchase_weapon(10)
+	hero.purchase_weapon(12)
 	hero.purchase_armor(6)
 	hero.skills = ["multicombo"]
 	hero.xp_level = 6
-	hero.max_health = 25
+	hero.max_health = 90
 	hero.strength = 3
 	hero.vitality = 3
 	hero.agility = 2
-	current_level_index = 2
+	current_level_index = 0
 	GameState.max_lvl_beat = 0
 	GameState.next_level_xp = 230
 
@@ -59,9 +60,9 @@ func start_level(lvl_nb):
 	hero.position = Vector2(64, 56)
 	hero.health = hero.max_health
 	health_bar.set_width(hero.max_health)
+	hero.remote_transform.remote_path = camera.get_path()
 	hero.start_run()
-	if not main_music.is_playing():
-		main_music.play()
+	main_music.play(0)
 
 func on_hero_level_complete():
 	battle_indicator.reset()
@@ -100,8 +101,8 @@ func on_hero_level_up(perk):
 		hero.agility += 1
 	else:
 		hero.vitality += 1
-		hero.max_health += 5
-		hero.health += 5
+		hero.max_health += 10
+		hero.health += 10
 		health_bar.set_width(hero.max_health)
 		hero.emit_signal("health_change", hero.health)
 	transition_animation_player.play("FinishLevelUp")

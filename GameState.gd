@@ -160,7 +160,67 @@ var skills := [{
 
 enum E {None, Slime, Slime2, Slime3, Blob, Blob2, Blob3, Giant, Giant2, Giant3, Gnome, Gnome2, Gnome3, Rat, Rat2, Rat3, Vermin, Vermin2, Vermin3, Warrior, Warrior2, Warrior3, Inferno, Treasure, Event}
 
-#var levels = [[[E.Slime, E.Slime]]]
+enum Skill {Normal, Advanced, Elite}
+
+# this makes it easier than to tweak than having to go through the inspector
+var enemies = {
+	E.Slime: {
+		"health": 5,
+		"damage": "1d2+2",
+		"speed": 2.5,
+		"gold": 4,
+		"xp": 2
+	},
+	E.Blob: {
+		"health": 14,
+		"damage": "1d3+3", # 4-6, 7-9, 13-15
+		"speed": 2.5,
+		"gold": 28,
+		"xp": 14
+	},
+	E.Vermin: {
+		"health": 22,
+		"damage": "3d3+3", # 6-10, 10-14, 18-
+		"speed": 2.4,
+		"gold": 119,
+		"xp": 60
+	},
+	E.Rat: {
+		"health": 35,
+		"damage": "2d6+4",
+		"speed": 2.5,
+		"gold": 252,
+		"xp": 126
+	},
+	E.Gnome: {
+		"health": 45,
+		"damage": "3d6+5",
+		"speed": 2.3,
+		"gold": 362,
+		"xp": 181
+	},
+	E.Giant: {
+		"health": 90,
+		"damage": "4d3+8",
+		"speed": 3,
+		"gold": 495,
+		"xp": 248
+	},
+	E.Warrior: {
+		"health": 90,
+		"damage": "4d4+9",
+		"speed": 2.2,
+		"gold": 655,
+		"xp": 328
+	},
+	E.Inferno: {
+		"health": 1000,
+		"damage": "5d6+35",
+		"speed": 2,
+		"gold": 0,
+		"xp": 0
+	},
+}
 
 var levels = [[
 	[E.Slime, E.Slime, E.Slime2],
@@ -191,3 +251,10 @@ var levels = [[
 	[], [],
 	[E.Inferno]
 ]]
+
+func is_advanced(enemy):
+	return [E.Slime2, E.Blob2, E.Giant2, E.Gnome2, E.Rat2, E.Vermin2, E.Warrior2].has(enemy)
+
+func is_elite(enemy):
+	return [E.Slime3, E.Blob3, E.Giant3, E.Gnome3, E.Rat3, E.Vermin3, E.Warrior3].has(enemy)
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/GUI/town-bg.png" type="Texture" id=1]
 [ext_resource path="res://Assets/GUI/btn-alchimist.png" type="Texture" id=2]
@@ -8,8 +8,15 @@
 [ext_resource path="res://Assets/GUI/btn-armory.png" type="Texture" id=6]
 [ext_resource path="res://Assets/GUI/btn-inventory.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Fonts/game_font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Assets/GUI/btn-alchimist-hover.png" type="Texture" id=9]
 [ext_resource path="res://Assets/GUI/Town.gd" type="Script" id=10]
 [ext_resource path="res://Assets/GUI/btn-stats.png" type="Texture" id=11]
+[ext_resource path="res://Assets/GUI/btn-blacksmith-hover.png" type="Texture" id=12]
+[ext_resource path="res://Assets/GUI/btn-library-hover.png" type="Texture" id=13]
+[ext_resource path="res://Assets/GUI/btn-armory-hover.png" type="Texture" id=14]
+[ext_resource path="res://Assets/GUI/btn-stats-hover.png" type="Texture" id=15]
+[ext_resource path="res://Assets/GUI/btn-inventory-hover.png" type="Texture" id=16]
+[ext_resource path="res://Assets/GUI/btn-go-hover.png" type="Texture" id=17]
 
 [node name="Town" type="Control"]
 margin_right = 128.0
@@ -53,6 +60,7 @@ align = 1
 [node name="ButtonBlacksmith" parent="TextureRect" instance=ExtResource( 3 )]
 margin_top = 29.0
 margin_bottom = 49.0
+texture_hover = ExtResource( 12 )
 display_name = "Blacksmith"
 label_path = NodePath("../DestLabel")
 
@@ -62,6 +70,7 @@ margin_top = 29.0
 margin_right = 60.0
 margin_bottom = 49.0
 texture_normal = ExtResource( 6 )
+texture_hover = ExtResource( 14 )
 display_name = "Armory"
 label_path = NodePath("../DestLabel")
 
@@ -71,6 +80,7 @@ margin_top = 29.0
 margin_right = 88.0
 margin_bottom = 49.0
 texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 9 )
 display_name = "Alchemist"
 label_path = NodePath("../DestLabel")
 
@@ -80,6 +90,7 @@ margin_top = 29.0
 margin_right = 116.0
 margin_bottom = 49.0
 texture_normal = ExtResource( 5 )
+texture_hover = ExtResource( 13 )
 display_name = "Library"
 label_path = NodePath("../DestLabel")
 
@@ -89,6 +100,7 @@ margin_top = 65.0
 margin_right = 111.0
 margin_bottom = 81.0
 texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 17 )
 display_name = "Leave town"
 label_path = NodePath("../DestLabel")
 
@@ -97,6 +109,7 @@ margin_left = 15.0
 margin_top = 66.0
 margin_bottom = 82.0
 texture_normal = ExtResource( 11 )
+texture_hover = ExtResource( 15 )
 display_name = "Stats"
 label_path = NodePath("../DestLabel")
 
@@ -106,5 +119,6 @@ margin_top = 66.0
 margin_right = 52.0
 margin_bottom = 82.0
 texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 16 )
 display_name = "Inventory"
 label_path = NodePath("../DestLabel")

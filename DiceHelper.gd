@@ -35,3 +35,11 @@ func get_avg(str_value):
 		total += (1 + int(mods[1])) / 2.0
 	return total
 	
+func multiply(str_value, multiplier:int):
+	var parts = str_value.split("+")
+	var modifier := 0
+	if parts.size() == 2:
+		modifier = int(parts[1]) * multiplier
+		return parts[0] + "+" + str(modifier)
+	else:
+		return str_value

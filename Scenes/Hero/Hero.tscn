@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Hero/Hero.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Hero/hero.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Sound/hit.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/Sound/hurt.wav" type="AudioStream" id=6]
 [ext_resource path="res://Assets/Sound/upgrade.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/FX/Sparks.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Animation" id=3]
 resource_name = "Attack"
@@ -374,6 +375,22 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Gradient" id=14]
+colors = PoolColorArray( 1, 1, 1, 1, 0.907764, 0.92398, 0.0531787, 1 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3( -5, -10, 0 )
+spread = 34.05
+gravity = Vector3( 0, 60, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.42
+color_ramp = SubResource( 15 )
+
 [node name="Hero" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -433,3 +450,6 @@ volume_db = -10.0
 pause_mode = 2
 stream = ExtResource( 7 )
 volume_db = -10.0
+
+[node name="Sparks" parent="." instance=ExtResource( 8 )]
+process_material = SubResource( 16 )

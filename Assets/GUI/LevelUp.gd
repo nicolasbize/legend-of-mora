@@ -27,7 +27,7 @@ func refresh(hero):
 	current_speed_label.text = str(hero.agility)
 	current_dmg_label.text = str(hero.strength)
 	if hero.vitality < GameState.max_levels: 
-		hp_inc_label.text = "+5"
+		hp_inc_label.text = "+10"
 		inc_hp_button.disabled = false
 	else:
 		hp_inc_label.text = "max"

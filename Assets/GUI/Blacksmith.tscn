@@ -110,6 +110,7 @@ margin_bottom = 72.0
 texture_normal = ExtResource( 5 )
 texture_hover = ExtResource( 13 )
 texture_disabled = ExtResource( 11 )
+single_click = false
 
 [node name="Req1Icon" type="TextureRect" parent="Background/PurchaseButton"]
 margin_left = 6.0

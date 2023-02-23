@@ -1,28 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/GUI/ProgressBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/FX/Sparks.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Enemies/slime.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Shaders/Enemy.gdshader" type="Shader" id=5]
 
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-uniform bool active = false;
-
-void fragment() {
-	vec4 previous_color = texture(TEXTURE, UV);
-	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
-	vec4 new_color = previous_color;
-	if (active == true)
-	{
-		new_color = white_color
-	}
-	COLOR = new_color;
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
-shader = SubResource( 2 )
-shader_param/active = false
+shader = ExtResource( 5 )
+shader_param/is_hurt_active = false
+shader_param/is_special = false
+shader_param/outline_color = Color( 0.0392157, 0.45098, 0.92549, 1 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "Attack"
@@ -92,12 +81,12 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 10, 10.5 )
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=13]
 resource_name = "Hurt"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/path = NodePath("Sprite:material:shader_param/is_hurt_active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -109,10 +98,10 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/path = NodePath("Sprite:material:shader_param/is_hurt_active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -126,9 +115,12 @@ tracks/0/keys = {
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource( 1 )
+color_advanced = Color( 0, 0.505882, 0.737255, 1 )
+color_elite = Color( 0.929412, 0.658824, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 12 )
+texture = ExtResource( 4 )
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -142,12 +134,9 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColliderArea"]
+visible = false
 position = Vector2( 0, -6.5 )
 shape = SubResource( 8 )
-
-[node name="HurtAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Hurt = SubResource( 1 )
-anims/RESET = SubResource( 4 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 
@@ -158,10 +147,18 @@ position = Vector2( -8, 4 )
 margin_right = 16.0
 
 [node name="Inner" parent="HealthBar" index="1"]
-margin_right = 14.0
+margin_right = 15.0
 
 [node name="Filler" parent="HealthBar" index="2"]
 margin_right = 15.0
 color = Color( 0.807843, 0.113725, 0.164706, 1 )
+
+[node name="Sparks" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -4 )
+amount = 20
+
+[node name="HurtAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hurt = SubResource( 13 )
+anims/RESET = SubResource( 14 )
 
 [editable path="HealthBar"]
