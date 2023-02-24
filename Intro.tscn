@@ -369,6 +369,7 @@ mouse_filter = 1
 script = ExtResource( 9 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_right = 128.0
 margin_bottom = 92.0
 mouse_filter = 2
@@ -396,7 +397,8 @@ margin_bottom = 89.0
 rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "Dusk had settled in abruptly"
+text = "Dusk had settled in abruptly..."
+align = 1
 
 [node name="Intro2" type="TextureRect" parent="."]
 visible = false
@@ -413,7 +415,8 @@ margin_bottom = 89.0
 rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "She just didn't have time"
+text = "She just didn't have time..."
+align = 1
 
 [node name="Intro3" type="TextureRect" parent="."]
 visible = false
@@ -431,6 +434,7 @@ rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "He emerged from darkness"
+align = 1
 
 [node name="GoldLabel2" type="Label" parent="Intro3"]
 margin_left = 3.0
@@ -441,6 +445,7 @@ rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "and she lost all control"
+align = 1
 
 [node name="Intro4" type="TextureRect" parent="."]
 visible = false
@@ -458,6 +463,7 @@ rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "You know what awaits her..."
+align = 1
 
 [node name="Intro5" type="TextureRect" parent="."]
 visible = false
@@ -475,6 +481,7 @@ rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Please, you are her last hope."
+align = 1
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_right = 128.0

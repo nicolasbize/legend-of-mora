@@ -1,8 +1,6 @@
 extends Control
 
-onready var continue_button := $TextureRect/ContinueButton
 onready var new_game_button := $TextureRect/NewGameButton
-onready var audio_button := $TextureRect/AudioButton
 onready var intro_button := $TextureRect/IntroButton
 onready var quit_button := $TextureRect/QuitButton
 onready var animation_player := $AnimationPlayer

@@ -63,7 +63,7 @@ margin_bottom = 53.0
 rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0, 0.913725, 1, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "below 30% HP"
+text = "below 50% HP"
 
 [node name="DismissButton" parent="." instance=ExtResource( 4 )]
 margin_left = 101.0

@@ -63,64 +63,46 @@ texture = ExtResource( 2 )
 
 [node name="TitleLabel" type="Label" parent="TextureRect"]
 margin_left = 6.0
-margin_top = 6.0
+margin_top = 13.0
 margin_right = 123.0
-margin_bottom = 16.0
+margin_bottom = 23.0
 custom_colors/font_color = Color( 0.92549, 0.596078, 0.0431373, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "The legend of Mora"
 align = 1
 
-[node name="GoldLabel" type="Label" parent="TextureRect"]
-margin_left = 3.0
-margin_top = 13.0
+[node name="GoldLabel2" type="Label" parent="TextureRect"]
+margin_left = 97.0
+margin_top = 77.0
 margin_right = 125.0
-margin_bottom = 26.0
+margin_bottom = 90.0
 rect_pivot_offset = Vector2( 44, 5 )
-custom_colors/font_color = Color( 0.909804, 0.909804, 0.909804, 1 )
+custom_colors/font_color = Color( 0.745098, 0.745098, 0.745098, 1 )
 custom_fonts/font = ExtResource( 1 )
-text = "Brackeys 2023 entry by Gad@"
-align = 1
-
-[node name="ContinueButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = -77.0
-margin_top = 33.0
-margin_right = -27.0
-margin_bottom = 44.0
-mouse_filter = 1
-text = "Continue"
-disabled = true
+text = "By Gad"
+align = 2
 
 [node name="NewGameButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 39.0
-margin_top = 38.0
-margin_right = 87.0
-margin_bottom = 49.0
+margin_left = 40.0
+margin_top = 32.0
+margin_right = 88.0
+margin_bottom = 43.0
 mouse_filter = 1
 text = "new game"
 
-[node name="AudioButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = -89.0
-margin_top = 54.0
-margin_right = -12.0
-margin_bottom = 65.0
-mouse_filter = 1
-text = "audio   on / off"
-is_toggle = true
-
 [node name="IntroButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 28.0
-margin_top = 54.0
-margin_right = 97.0
-margin_bottom = 65.0
+margin_left = 29.0
+margin_top = 45.0
+margin_right = 98.0
+margin_bottom = 56.0
 mouse_filter = 1
 text = "watch   intro"
 
 [node name="QuitButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 48.0
-margin_top = 70.0
-margin_right = 76.0
-margin_bottom = 81.0
+margin_left = 49.0
+margin_top = 58.0
+margin_right = 77.0
+margin_bottom = 69.0
 mouse_filter = 1
 text = "quit"
 

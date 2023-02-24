@@ -35,6 +35,7 @@ var state = State.IDLE
 enum State {IDLE, ATTACK}
 
 func _ready():
+	randomize()
 	connect("hit", self, "get_hurt")
 	hurt_animation_player.play("RESET")
 	attack_timer.connect("timeout", self, "on_attack_timer_timeout")
@@ -85,12 +86,9 @@ func promote(skill_lvl):
 	xp *= round(multiplier * 1.4)
 	max_health *= multiplier
 	health = max_health
-	speed = speed - 0.1 * (multiplier - 1)
+	speed = speed - 0.1 * (multiplier - 1) + rand_range(-0.3, 0.3)
 	weapon = DiceHelper.multiply(weapon, multiplier)
 	
-	# increase stats
-	
-
 func _process(delta):
 	if player != null:
 		match state:
@@ -102,12 +100,12 @@ func _process(delta):
 					animation_player.seek(0)
 
 func stop_attack_animation():
-	attack_timer.start(speed)
+	attack_timer.start(speed + rand_range(-0.3, 0.3))
 	state = State.IDLE
 
 func start_fight(enemy):
 	player = enemy
-	attack_timer.start(delay_attack)
+	attack_timer.start(delay_attack + rand_range(-0.3, 0.3))
 
 func stop():
 	player = null

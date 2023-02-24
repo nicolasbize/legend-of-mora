@@ -6,10 +6,10 @@ var prev_level_xp = 0
 var next_level_xp = 20
 var lvl_progression_multiplier = 1.4
 var min_hero_speed = 0.5 # can't attack faster than this
-var max_levels = 15
-var berserk_quota = 0.30 # below 25% max_health, go berserk if you have the skill
+var max_levels = 10
+var berserk_quota = 0.5 # below 25% max_health, go berserk if you have the skill
 var berserk_dmg_multiplier = 1.5
-var combo_dmg_multiplier = 1.5
+var combo_dmg_multiplier = 1.2
 
 var no_weapon := {
 	"damage": "1d2",
@@ -118,27 +118,27 @@ var armors := [{
 	"texture": preload("res://Scenes/Hero/armor-04.png"),
 	"name": "tower"
 }, {
-	"effect": 11,
+	"effect": 10,
 	"price": 1200,
 	"texture": preload("res://Scenes/Hero/armor-05.png"),
 	"name": "aegis"
 }, {
-	"effect": 16,
+	"effect": 12,
 	"price": 1600,
 	"texture": preload("res://Scenes/Hero/armor-06.png"),
 	"name": "chain mail"
 }, {
-	"effect": 22,
+	"effect": 15,
 	"price": 2000,
 	"texture": preload("res://Scenes/Hero/armor-07.png"),
 	"name": "gold mail"
 }, {
-	"effect": 29,
+	"effect": 18,
 	"price": 2500,
 	"texture": preload("res://Scenes/Hero/armor-08.png"),
 	"name": "plate"
 }, {
-	"effect": 40,
+	"effect": 21,
 	"price": 3500,
 	"texture": preload("res://Scenes/Hero/armor-09.png"),
 	"name": "gold plate"
@@ -150,11 +150,11 @@ var skills := [{
 	"xp": 3
 }, {
 	"title": "multicombo",
-	"price": 100,
+	"price": 500,
 	"xp": 6
 }, {
 	"title": "reflect",
-	"price": 500,
+	"price": 1000,
 	"xp": 9
 }]
 
@@ -175,42 +175,42 @@ var enemies = {
 		"health": 14,
 		"damage": "1d3+3", # 4-6, 7-9, 13-15
 		"speed": 2.5,
-		"gold": 28,
+		"gold": 22,
 		"xp": 14
 	},
 	E.Vermin: {
 		"health": 22,
 		"damage": "3d3+3", # 6-10, 10-14, 18-
 		"speed": 2.4,
-		"gold": 119,
+		"gold": 54,
 		"xp": 60
 	},
 	E.Rat: {
 		"health": 35,
 		"damage": "2d6+4",
 		"speed": 2.5,
-		"gold": 252,
+		"gold": 112,
 		"xp": 126
 	},
 	E.Gnome: {
 		"health": 45,
 		"damage": "3d6+5",
 		"speed": 2.3,
-		"gold": 362,
+		"gold": 184,
 		"xp": 181
 	},
 	E.Giant: {
 		"health": 90,
 		"damage": "4d3+8",
 		"speed": 3,
-		"gold": 495,
+		"gold": 294,
 		"xp": 248
 	},
 	E.Warrior: {
 		"health": 90,
 		"damage": "4d4+9",
 		"speed": 2.2,
-		"gold": 655,
+		"gold": 355,
 		"xp": 328
 	},
 	E.Inferno: {

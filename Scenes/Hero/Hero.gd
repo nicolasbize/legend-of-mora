@@ -57,7 +57,7 @@ onready var hit_sound := $HitSound
 onready var hurt_sound := $HurtSound
 onready var kill_sound := $KillSound
 onready var upgrade_sound := $UpgradeSound
-
+onready var finish_level_timer := $FinishLevelTimer
 
 const DamageIndicator = preload("res://Assets/FX/DamageIndicator.tscn")
 const HeroTexture = preload("res://Scenes/Hero/hero.png")
@@ -79,6 +79,7 @@ func _ready():
 	attack_button.connect("pressed", self, "on_attack_press")
 	potion_button.connect("pressed", self, "on_potion_press")
 	defend_button.connect("pressed", self, "on_defend_press")
+	finish_level_timer.connect("timeout", self, "on_level_complete")
 
 func _physics_process(delta):
 	if is_berserked():
@@ -144,6 +145,7 @@ func on_attack_press():
 
 func on_defend_press():
 	if health > 0:
+		current_combo_amount = 0
 		if defend_button.is_activated:
 			ignore_next_attack = true
 			current_state = state.DEFENSE
@@ -255,9 +257,13 @@ func enemy_death(gold_award, xp_award, is_boss):
 	battle_indicator.reset()
 	if is_boss:
 		finished_level = true
+		attack_button.disabled = true
+		defend_button.disabled = true
 		remote_transform.remote_path = ""
-		yield(get_tree().create_timer(3), "timeout")
-		emit_signal("level_complete")
+		finish_level_timer.start(3)
+
+func on_level_complete():
+	emit_signal("level_complete")
 
 func reset_attack():
 	attack_button.frame = 0

@@ -453,3 +453,7 @@ volume_db = -10.0
 
 [node name="Sparks" parent="." instance=ExtResource( 8 )]
 process_material = SubResource( 16 )
+
+[node name="FinishLevelTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

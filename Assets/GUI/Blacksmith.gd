@@ -9,6 +9,7 @@ onready var req_2_label = $Background/PurchaseButton/Req2Label
 onready var req_3_label = $Background/PurchaseButton/Req3Label
 onready var item_label = $Background/PurchaseButton/ItemLabel
 onready var stat_1_label2 = $Background/Stat1Label2
+onready var stat_2_label3 = $Background/Stat2Label3
 
 enum ShopType {BLACKSMITH, ARMORY, ALCHIMIST, LIBRARY}
 
@@ -53,6 +54,7 @@ func refresh(skip_gold = false):
 			refresh_alchimist()
 		ShopType.LIBRARY:
 			refresh_library()
+	stat_2_label3.visible = purchase_button.visible
 
 func refresh_blacksmith():
 	stat_1_label.text = DiceHelper.get_range(player.weapon.damage)
@@ -80,6 +82,7 @@ func refresh_alchimist():
 	purchase_button.visible = player.has_potion == false
 	req_2_label.text = str(player.get_potion_price())
 	purchase_button.disabled = player.get_potion_price() > player.gold
+	
 
 func refresh_library():
 	if GameState.skills.size() > 0:
