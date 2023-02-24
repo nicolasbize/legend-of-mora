@@ -7,7 +7,7 @@ var next_level_xp = 20
 var lvl_progression_multiplier = 1.4
 var min_hero_speed = 0.5 # can't attack faster than this
 var max_levels = 15
-var berserk_quota = 0.25 # below 25% max_health, go berserk if you have the skill
+var berserk_quota = 0.30 # below 25% max_health, go berserk if you have the skill
 var berserk_dmg_multiplier = 1.5
 var combo_dmg_multiplier = 1.5
 
@@ -145,17 +145,17 @@ var armors := [{
 }]
 
 var skills := [{
+	"title": "berserk",
+	"price": 200,
+	"xp": 3
+}, {
 	"title": "multicombo",
 	"price": 100,
-	"xp": 1
+	"xp": 6
 }, {
-	"title": "deflect",
+	"title": "reflect",
 	"price": 500,
-	"xp": 5
-}, {
-	"title": "berserk",
-	"price": 1000,
-	"xp": 10
+	"xp": 9
 }]
 
 enum E {None, Slime, Slime2, Slime3, Blob, Blob2, Blob3, Giant, Giant2, Giant3, Gnome, Gnome2, Gnome3, Rat, Rat2, Rat3, Vermin, Vermin2, Vermin3, Warrior, Warrior2, Warrior3, Inferno, Treasure, Event}

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/GUI/Blacksmith.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/GUI/xp-icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/GUI/SkillInfoPanel.tscn" type="PackedScene" id=3]
 
 [node name="Library" instance=ExtResource( 1 )]
 shop_type = 3
@@ -14,6 +15,11 @@ margin_top = 64.0
 margin_bottom = 74.0
 
 [node name="Stat1Icon" parent="Background" index="2"]
+visible = true
+margin_left = 79.0
+margin_top = 36.0
+margin_right = 86.0
+margin_bottom = 43.0
 texture = ExtResource( 2 )
 
 [node name="Stat1Label" parent="Background" index="3"]
@@ -39,6 +45,7 @@ margin_top = 56.0
 margin_bottom = 80.0
 
 [node name="Req1Icon" parent="Background/PurchaseButton" index="1"]
+visible = false
 margin_left = 60.0
 margin_top = -20.0
 margin_right = 67.0
@@ -68,3 +75,39 @@ texture = ExtResource( 2 )
 [node name="Req3Label" parent="Background/PurchaseButton" index="6"]
 visible = true
 custom_colors/font_color = Color( 0.192157, 0.866667, 0.0705882, 1 )
+
+[node name="BerserkInfoPanel" parent="." index="1" instance=ExtResource( 3 )]
+visible = false
+
+[node name="ComboInfoPanel" parent="." index="2" instance=ExtResource( 3 )]
+visible = false
+
+[node name="IntroEmphasis" parent="ComboInfoPanel" index="1"]
+text = "MultiCombo"
+
+[node name="Info1" parent="ComboInfoPanel" index="2"]
+text = "Sequential attacks deal"
+
+[node name="Info2" parent="ComboInfoPanel" index="3"]
+text = "incremental damage. Getting"
+
+[node name="Info3" parent="ComboInfoPanel" index="4"]
+text = "hit resets the combo."
+
+[node name="ReflectInfoPanel" parent="." index="3" instance=ExtResource( 3 )]
+visible = false
+
+[node name="IntroEmphasis" parent="ReflectInfoPanel" index="1"]
+text = "Reflect"
+
+[node name="Info1" parent="ReflectInfoPanel" index="2"]
+text = "Blocking attacks will"
+
+[node name="Info2" parent="ReflectInfoPanel" index="3"]
+text = "reflect up to 30% damage."
+
+[node name="Info3" parent="ReflectInfoPanel" index="4"]
+text = ""
+
+[editable path="ComboInfoPanel"]
+[editable path="ReflectInfoPanel"]

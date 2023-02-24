@@ -82,13 +82,16 @@ func refresh_alchimist():
 	purchase_button.disabled = player.get_potion_price() > player.gold
 
 func refresh_library():
-	var price = GameState.skills[current_index].price
-	var lvl_req = GameState.skills[current_index].xp
-	stat_1_label2.text = "lvl " + str(player.xp_level)
-	item_label.text = GameState.skills[current_index].title
-	req_2_label.text = str(price)
-	req_3_label.text = str(lvl_req)
-	purchase_button.disabled = player.xp_level < lvl_req or player.gold < price
+	if GameState.skills.size() > 0:
+		var price = GameState.skills[current_index].price
+		var lvl_req = GameState.skills[current_index].xp
+		stat_1_label2.text = "lvl " + str(player.xp_level)
+		item_label.text = GameState.skills[current_index].title
+		req_2_label.text = str(price)
+		req_3_label.text = str(lvl_req)
+		purchase_button.disabled = player.xp_level < lvl_req or player.gold < price
+	else:
+		purchase_button.visible = false
 
 func on_hero_gold_change(gold):
 	stat_2_label.set_value(gold)
@@ -103,6 +106,13 @@ func on_purchase_press():
 		ShopType.ALCHIMIST:
 			player.purchase_potion()
 		ShopType.LIBRARY:
+			match GameState.skills[current_index].title:
+				"multicombo":
+					find_node("ComboInfoPanel").visible = true
+				"reflect":
+					find_node("ReflectInfoPanel").visible = true
+				"berserk":
+					find_node("BerserkInfoPanel").visible = true
 			player.purchase_skill(current_index)
 	current_index = 0
 	refresh()

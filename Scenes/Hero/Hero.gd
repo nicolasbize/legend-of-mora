@@ -19,7 +19,7 @@ export(int) var health := max_health
 export(bool) var has_potion := false
 export(int) var gold := 0
 
-var skills := [] # multicombo, berserk, deflect
+var skills := [] # multicombo, berserk, reflect
 var weapon := GameState.no_weapon
 var armor := GameState.no_armor
 
@@ -42,6 +42,7 @@ var battle_indicator = null
 var ignore_next_attack := false
 var combo_next_attack := false
 var finished_level := false
+var run_just_started := false
 
 onready var animation_player := $AnimationPlayer
 onready var hurt_animation_player := $HurtAnimationPlayer
@@ -110,8 +111,9 @@ func is_in_battle():
 func start_run():
 	current_state = state.MOVING
 	potion_button.disabled = not has_potion
-	attack_button.disabled = false
-	defend_button.disabled = false
+	attack_button.disabled = true
+	defend_button.disabled = true
+	run_just_started = true
 
 func enter_fight(enemy_area):
 	current_enemy = enemy_area.get_owner()
@@ -121,6 +123,10 @@ func enter_fight(enemy_area):
 	current_state = state.IDLE
 	battle_indicator.reset()
 	finished_level = false
+	if run_just_started:
+		run_just_started = false
+		attack_button.disabled = false
+		defend_button.disabled = false
 	
 func prepare_defense():
 	if not defend_button.disabled:
@@ -174,8 +180,7 @@ func perform_attack():
 func finish_attack_animation():
 	current_state = state.IDLE
 	if current_enemy == null or not is_instance_valid(current_enemy):
-		var timer_transition = finished_level and 2 or 0.3
-		yield(get_tree().create_timer(timer_transition), "timeout")
+		yield(get_tree().create_timer(0.3), "timeout")
 		current_state = state.MOVING
 
 func finish_defend_animation():
@@ -190,12 +195,13 @@ func finish_dying_animation():
 	emit_signal("death")
 
 func get_hurt(dmg):
-	var damage = max(DiceHelper.roll(dmg) - armor.effect, 0)
+	var initial_damage = DiceHelper.roll(dmg)
+	var damage = max(initial_damage - armor.effect, 0)
 	if ignore_next_attack:
 		ignore_next_attack = false
 		battle_indicator.block()
-		if skills.has("deflect"):
-			current_enemy.emit_signal("hit", damage)
+		if skills.has("reflect"):
+			current_enemy.emit_signal("hit", round(initial_damage * 0.3))
 		block_sound.play()
 	else:
 		if damage <= 0:

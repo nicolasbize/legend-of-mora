@@ -81,8 +81,8 @@ func promote(skill_lvl):
 			sprite.material.set("shader_param/outline_color", color_elite);
 			sprite.offset.y -= 1
 			multiplier = elite_multiplier
-	gold *= multiplier
-	xp *= multiplier
+	gold *= round(multiplier * 0.6)
+	xp *= round(multiplier * 1.4)
 	max_health *= multiplier
 	health = max_health
 	speed = speed - 0.1 * (multiplier - 1)

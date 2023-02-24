@@ -43,5 +43,13 @@ margin_bottom = 17.0
 custom_colors/font_color = Color( 0.898039, 0.317647, 0.0705882, 1 )
 text = "refill"
 
+[node name="Req2Icon" parent="Background/PurchaseButton" index="3"]
+margin_top = -11.0
+margin_bottom = -4.0
+
+[node name="Req2Label" parent="Background/PurchaseButton" index="4"]
+margin_top = -14.0
+margin_bottom = -2.0
+
 [node name="ItemLabel" parent="Background/PurchaseButton" index="7"]
 visible = false
