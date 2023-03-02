@@ -22,7 +22,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "TransionScene"
+resource_name = "TransitionScene"
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:modulate")
 tracks/0/interp = 1
@@ -84,25 +84,33 @@ align = 2
 
 [node name="NewGameButton" parent="TextureRect" instance=ExtResource( 5 )]
 margin_left = 40.0
-margin_top = 32.0
+margin_top = 43.0
 margin_right = 88.0
-margin_bottom = 43.0
+margin_bottom = 54.0
 mouse_filter = 1
 text = "new game"
 
+[node name="ContinueButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 39.0
+margin_top = 29.0
+margin_right = 90.0
+margin_bottom = 40.0
+mouse_filter = 1
+text = "continue"
+
 [node name="IntroButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 29.0
-margin_top = 45.0
-margin_right = 98.0
-margin_bottom = 56.0
+margin_left = 30.0
+margin_top = 56.0
+margin_right = 99.0
+margin_bottom = 67.0
 mouse_filter = 1
 text = "watch   intro"
 
 [node name="QuitButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 49.0
-margin_top = 58.0
-margin_right = 77.0
-margin_bottom = 69.0
+margin_left = 50.0
+margin_top = 69.0
+margin_right = 78.0
+margin_bottom = 80.0
 mouse_filter = 1
 text = "quit"
 
@@ -115,4 +123,4 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
-anims/TransionScene = SubResource( 2 )
+anims/TransitionScene = SubResource( 2 )

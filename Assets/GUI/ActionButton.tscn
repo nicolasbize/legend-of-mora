@@ -10,7 +10,7 @@
 
 [sub_resource type="Animation" id=3]
 resource_name = "Activate"
-length = 0.5
+length = 0.6
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath("SkillSprite:frame")
@@ -31,7 +31,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.18, 0.5 ),
+"times": PoolRealArray( 0.16, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],

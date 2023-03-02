@@ -7,6 +7,7 @@ const WAIT_CURSOR = preload("res://Assets/GUI/cursor-wait.png")
 onready var progress_bar := $ProgressBar
 onready var animation_player := $AnimationPlayer
 onready var activation_timer := $ActivationTimer
+onready var skill_sprite := $SkillSprite
 
 var hovered := false
 var is_activated := false
@@ -20,6 +21,7 @@ func _ready():
 	progress_bar.visible = false
 	progress_bar.connect("complete", self, "on_progress_complete")
 	activation_timer.connect("timeout", self, "activate")
+	randomize()
 
 func on_mouse_enter():
 	hovered = true
@@ -51,10 +53,14 @@ func on_progress_complete():
 	if hovered:
 		Input.set_custom_mouse_cursor(POINTER_CURSOR)
 
-func activate():
+func activate(speed_activation = false):
 	activating = true
 	is_success_activation = false
 	is_activated = false
+	if speed_activation:
+		animation_player.playback_speed = 1.5
+	else:
+		animation_player.playback_speed = 1
 	animation_player.play("Activate")
 
 func is_activated():

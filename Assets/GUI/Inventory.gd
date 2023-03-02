@@ -9,7 +9,7 @@ func on_return_button():
 	transition_animation.play("LeaveInventory")
 
 func refresh():
-	var current_lvl_xp = str(player.xp - GameState.prev_level_xp)
+	var current_lvl_xp = str(player.xp)
 	var next_lvl_xp = str(GameState.next_level_xp)
 	level_label.text = "lvl " + str(player.xp_level) + " (" + current_lvl_xp + "/" + next_lvl_xp + ")"
 	gold_label.text = str(player.gold)

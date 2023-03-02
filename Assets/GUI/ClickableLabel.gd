@@ -17,9 +17,12 @@ func _ready():
 	connect("mouse_entered", self, "on_mouse_enter")
 	connect("mouse_exited", self, "on_mouse_exit")
 	connect("gui_input", self, "on_mouse_input")
-	if disabled:
-		set("custom_colors/font_color", disabled_color)		
 	original_color = get("custom_colors/font_color")
+	if disabled:
+		disable()
+
+func disable():
+	set("custom_colors/font_color", disabled_color)
 	
 func on_mouse_enter():
 	if not disabled:

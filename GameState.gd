@@ -1,8 +1,9 @@
 extends Node
 
+const SAVE_FILE_LOCATION := "user://legend-of-mora.data"
+
 var nb_days = 1
 var max_lvl_beat = -1 # beat plains => 1, beat forest => 2, etc
-var prev_level_xp = 0
 var next_level_xp = 20
 var lvl_progression_multiplier = 1.4
 var min_hero_speed = 0.5 # can't attack faster than this
@@ -10,6 +11,9 @@ var max_levels = 10
 var berserk_quota = 0.5 # below 25% max_health, go berserk if you have the skill
 var berserk_dmg_multiplier = 1.5
 var combo_dmg_multiplier = 1.2
+var is_first_run := true
+var nb_deaths := 0
+var is_loading_savegame := false
 
 var no_weapon := {
 	"damage": "1d2",
@@ -258,3 +262,52 @@ func is_advanced(enemy):
 func is_elite(enemy):
 	return [E.Slime3, E.Blob3, E.Giant3, E.Gnome3, E.Rat3, E.Vermin3, E.Warrior3].has(enemy)
 
+func get_save_data(player):
+	return {
+		"global": {
+			"nb_days": nb_days,
+			"max_lvl_beat": max_lvl_beat,
+			"next_level_xp": next_level_xp,
+			"is_first_run": is_first_run,
+			"nb_deaths": nb_deaths
+		}, 
+		"player": {
+			"xp": player.xp,
+			"xp_level": player.xp_level,
+			"strength": player.strength,
+			"agility": player.agility,
+			"vitality": player.vitality,
+			"max_health": player.max_health,
+			"health": player.max_health,
+			"has_potion": player.has_potion,
+			"gold": player.gold,
+			"skills": player.skills,
+			"weapon_name": player.weapon.name,
+			"armor_name": player.armor.name
+		}
+	}
+
+func load_data(data, player):
+	nb_days = data.global.nb_days
+	max_lvl_beat = data.global.max_lvl_beat
+	next_level_xp = data.global.next_level_xp
+	is_first_run = data.global.is_first_run
+	nb_deaths = data.global.nb_deaths
+	player.xp = data.player.xp
+	player.xp_level = data.player.xp_level
+	player.strength = data.player.strength
+	player.agility = data.player.agility
+	player.vitality = data.player.vitality
+	player.max_health = data.player.max_health
+	player.max_health = data.player.max_health
+	player.has_potion = data.player.has_potion
+	player.gold = data.player.gold
+	for i in range(armors.size() - 1):
+		if armors[i].name == data.player.armor_name:
+			player.purchase_armor(i, true)
+	for i in range(weapons.size() - 1):
+		if weapons[i].name == data.player.weapon_name:
+			player.purchase_weapon(i, true)
+	for skill in ["berserk", "multicombo", "reflect"]:
+		if data.player.skills.has(skill):
+			player.purchase_skill(0, true)

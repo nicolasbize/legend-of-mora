@@ -129,9 +129,9 @@ func enter_fight(enemy_area):
 		attack_button.disabled = false
 		defend_button.disabled = false
 	
-func prepare_defense():
+func prepare_defense(fast_activation = false):
 	if not defend_button.disabled:
-		defend_button.activate()
+		defend_button.activate(fast_activation)
 	
 func on_attack_press():
 	if health > 0:
@@ -158,26 +158,35 @@ func get_attack_speed():
 
 func on_potion_press():
 	if health < max_health:
+		var diff_health = max_health - health
 		health = max_health
 		emit_signal("health_change", health)
 		has_potion = false
 		potion_button.disabled = true
 		upgrade_sound.play()
+		create_dmg_indicator(diff_health, true)
 
 func is_berserked():
 	return skills.has("berserk") and health <= GameState.berserk_quota * max_health
 
 func perform_attack():
 	if current_enemy != null and is_instance_valid(current_enemy):
-		var dmg = DiceHelper.roll(weapon.damage + "+" + str(strength))
-		if is_berserked():
-			dmg *= GameState.berserk_dmg_multiplier
-		if skills.has("multicombo") and current_combo_amount > 0:
-			dmg *= (GameState.combo_dmg_multiplier + current_combo_amount as float / 5.0)
-			battle_indicator.combo(current_combo_amount + 1)
-		dmg = round(dmg)
-		current_enemy.emit_signal("hit", dmg)
-		hit_sound.play()
+		if current_enemy.in_dodge_mode:
+			current_enemy.dodge()
+		else:
+			var dmg = DiceHelper.roll(weapon.damage + "+" + str(strength))
+			if is_berserked():
+				dmg *= GameState.berserk_dmg_multiplier
+			if skills.has("multicombo") and current_combo_amount > 0:
+				dmg *= (GameState.combo_dmg_multiplier + current_combo_amount as float / 5.0)
+				battle_indicator.combo(current_combo_amount + 1)
+			dmg = round(dmg)
+			if current_enemy.in_reflection:
+				ignore_next_attack = false
+				get_hurt(weapon.damage + "+" + str(strength+armor.effect))
+			else:
+				current_enemy.emit_signal("hit", dmg)
+				hit_sound.play()
 
 func finish_attack_animation():
 	current_state = state.IDLE
@@ -196,15 +205,21 @@ func finish_dying_animation():
 	current_state = state.DEAD
 	emit_signal("death")
 
-func get_hurt(dmg):
+func get_hurt(dmg, is_power_attack = false):
 	var initial_damage = DiceHelper.roll(dmg)
 	var damage = max(initial_damage - armor.effect, 0)
+	if is_power_attack and not ignore_next_attack:
+		damage = max(39, health - 1)
 	if ignore_next_attack:
 		ignore_next_attack = false
 		battle_indicator.block()
 		if skills.has("reflect"):
-			current_enemy.emit_signal("hit", round(initial_damage * 0.3))
+			if current_enemy.in_reflection:
+				current_enemy.set_vulnerable()
+			else:
+				current_enemy.emit_signal("hit", round(initial_damage * 0.3))
 		block_sound.play()
+		damage = 0
 	else:
 		if damage <= 0:
 			damage = 0
@@ -214,11 +229,8 @@ func get_hurt(dmg):
 			sparks.amount = damage
 			sparks.emitting = true
 			battle_indicator.reset()
-			
-		var dmg_indicator = DamageIndicator.instance()
-		get_owner().add_child(dmg_indicator)
-		dmg_indicator.set_text(str(damage))
-		dmg_indicator.position = position + Vector2.UP * 10
+		
+		create_dmg_indicator(damage)
 		current_combo_amount = 0
 		combo_next_attack = false
 		health -= damage
@@ -227,7 +239,16 @@ func get_hurt(dmg):
 		camera.shake(0.2, 1)
 		if health <= 0:
 			process_death()
-	
+	return damage
+
+func create_dmg_indicator(damage, is_green = false):
+	var dmg_indicator = DamageIndicator.instance()
+	get_owner().add_child(dmg_indicator)
+	dmg_indicator.set_text(str(damage))
+	dmg_indicator.position = position + Vector2.UP * 10
+	if is_green:
+		dmg_indicator.set_green()
+
 func get_potion_price():
 	return vitality * vitality * 10
 	
@@ -269,28 +290,32 @@ func reset_attack():
 	attack_button.frame = 0
 	current_state = state.IDLE
 
-func purchase_weapon(index):
+func purchase_weapon(index, is_gift = false):
 	weapon = GameState.weapons[index]
 	GameState.weapons = GameState.weapons.slice(index + 1, GameState.weapons.size() - 1)
-	gold -= weapon.price
-	emit_signal("gold_change", gold)
 	weapon_sprite.texture = weapon.texture
+	if not is_gift:
+		gold -= weapon.price
+		emit_signal("gold_change", gold)
 
-func purchase_armor(index):
+func purchase_armor(index, is_gift = false):
 	armor = GameState.armors[index]
 	GameState.armors = GameState.armors.slice(index + 1, GameState.armors.size() - 1)
-	gold -= armor.price
-	emit_signal("gold_change", gold)
 	armor_sprite.texture = armor.texture
+	if not is_gift:
+		gold -= armor.price
+		emit_signal("gold_change", gold)
 
-func purchase_potion():
-	gold -= get_potion_price()
-	emit_signal("gold_change", gold)	
+func purchase_potion(is_gift = false):
 	has_potion = true
+	if not is_gift:
+		gold -= get_potion_price()
+		emit_signal("gold_change", gold)	
 
-func purchase_skill(index):
-	gold -= GameState.skills[index].price
+func purchase_skill(index, is_gift = false):
 	skills.append(GameState.skills[index].title)
 	GameState.skills = GameState.skills.slice(index + 1, GameState.skills.size() - 1)
-	emit_signal("gold_change", gold)
+	if not is_gift:
+		gold -= GameState.skills[index].price
+		emit_signal("gold_change", gold)
 	
