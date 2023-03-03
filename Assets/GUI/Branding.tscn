@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Videos/648x432_v1.ogv" type="VideoStream" id=1]
+[ext_resource path="res://Assets/GUI/Branding.gd" type="Script" id=2]
+
+[node name="Branding" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_right = 128.0
+margin_bottom = 92.0
+stream = ExtResource( 1 )
+autoplay = true

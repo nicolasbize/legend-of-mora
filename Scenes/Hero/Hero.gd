@@ -131,7 +131,7 @@ func enter_fight(enemy_area):
 	
 func prepare_defense(fast_activation = false):
 	if not defend_button.disabled:
-		defend_button.activate(fast_activation)
+		defend_button.start_activation_animation(fast_activation)
 	
 func on_attack_press():
 	if health > 0:
@@ -146,12 +146,11 @@ func on_attack_press():
 func on_defend_press():
 	if health > 0:
 		current_combo_amount = 0
-		if defend_button.is_activated:
+		if defend_button.is_success_activation:
 			ignore_next_attack = true
 			current_state = state.DEFENSE
-		else:
-			defend_button.disable_for(get_attack_speed())
-			attack_button.disable_for(get_attack_speed())
+		defend_button.disable_for(get_attack_speed())
+		attack_button.disable_for(get_attack_speed())
 
 func get_attack_speed():
 	return base_speed - 20 * agility
@@ -163,7 +162,8 @@ func on_potion_press():
 		emit_signal("health_change", health)
 		has_potion = false
 		potion_button.disabled = true
-		upgrade_sound.play()
+		if GameState.is_audio_enabled:
+			upgrade_sound.play()
 		create_dmg_indicator(diff_health, true)
 
 func is_berserked():
@@ -183,10 +183,11 @@ func perform_attack():
 			dmg = round(dmg)
 			if current_enemy.in_reflection:
 				ignore_next_attack = false
-				get_hurt(weapon.damage + "+" + str(strength+armor.effect))
+				get_hurt("0d+" + str(round(armor.effect + max_health / 5.0)))
 			else:
 				current_enemy.emit_signal("hit", dmg)
-				hit_sound.play()
+				if GameState.is_audio_enabled:
+					hit_sound.play()
 
 func finish_attack_animation():
 	current_state = state.IDLE
@@ -209,7 +210,7 @@ func get_hurt(dmg, is_power_attack = false):
 	var initial_damage = DiceHelper.roll(dmg)
 	var damage = max(initial_damage - armor.effect, 0)
 	if is_power_attack and not ignore_next_attack:
-		damage = max(39, health - 1)
+		damage = max(19, health - 1)
 	if ignore_next_attack:
 		ignore_next_attack = false
 		battle_indicator.block()
@@ -217,8 +218,9 @@ func get_hurt(dmg, is_power_attack = false):
 			if current_enemy.in_reflection:
 				current_enemy.set_vulnerable()
 			else:
-				current_enemy.emit_signal("hit", round(initial_damage * 0.3))
-		block_sound.play()
+				current_enemy.emit_signal("hit", round(initial_damage * 0.3), true)
+		if GameState.is_audio_enabled:
+			block_sound.play()
 		damage = 0
 	else:
 		if damage <= 0:
@@ -234,7 +236,8 @@ func get_hurt(dmg, is_power_attack = false):
 		current_combo_amount = 0
 		combo_next_attack = false
 		health -= damage
-		hurt_sound.play()
+		if GameState.is_audio_enabled:
+			hurt_sound.play()
 		emit_signal("health_change", health)
 		camera.shake(0.2, 1)
 		if health <= 0:
@@ -274,7 +277,8 @@ func enemy_death(gold_award, xp_award, is_boss):
 	attack_button.cancel_activation()
 	current_combo_amount = 0
 	battle_indicator.reset()
-	kill_sound.play()
+	if GameState.is_audio_enabled:
+		kill_sound.play()
 	battle_indicator.reset()
 	if is_boss:
 		finished_level = true
@@ -313,9 +317,10 @@ func purchase_potion(is_gift = false):
 		emit_signal("gold_change", gold)	
 
 func purchase_skill(index, is_gift = false):
+	var price = GameState.skills[index].price
 	skills.append(GameState.skills[index].title)
 	GameState.skills = GameState.skills.slice(index + 1, GameState.skills.size() - 1)
 	if not is_gift:
-		gold -= GameState.skills[index].price
+		gold -= price
 		emit_signal("gold_change", gold)
 	

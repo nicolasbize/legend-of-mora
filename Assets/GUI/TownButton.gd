@@ -16,11 +16,12 @@ func _ready():
 	connect("mouse_entered", self, "on_mouse_enter")
 	connect("mouse_exited", self, "on_mouse_exit")
 	connect("pressed", self, "on_press")
-	if single_click:
+	if not toggle_mode:
 		connect("pressed", self, "on_mouse_exit")
 	
 func on_press():
-	click_sound.play()
+	if GameState.is_audio_enabled:
+		click_sound.play()
 
 func on_mouse_enter():
 	if not disabled:

@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="The Legend of Mora"
-run/main_scene="res://Intro.tscn"
+run/main_scene="res://Assets/GUI/Branding.tscn"
 
 [autoload]
 

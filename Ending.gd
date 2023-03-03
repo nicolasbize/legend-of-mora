@@ -6,4 +6,5 @@ func on_ending_done():
 	get_tree().change_scene("res://MainMenu.tscn")
 
 func _ready():
-	animation_player.play("Ending")
+	if GameState.is_audio_enabled:
+		animation_player.play("Ending")

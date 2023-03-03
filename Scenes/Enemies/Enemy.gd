@@ -29,7 +29,7 @@ export(bool) var is_level_boss := false
 export(Color) var color_advanced;
 export(Color) var color_elite;
 export(int) var advanced_multiplier := 2
-export(int) var elite_multiplier := 4
+export(int) var elite_multiplier := 3
 export(GameState.Skill) var skill := GameState.Skill.Normal
 export(float) var time_invincible := 3
 
@@ -92,7 +92,6 @@ func set_base_stats(enemy_type):
 		has_power_dodge = true
 	elif enemy_type == GameState.E.Inferno:
 		type = GameState.E.Inferno
-		has_power_reduce_reaction_time = true
 		has_power_reflection = true
 		has_power_steal_hp = true
 		in_reflection = true
@@ -121,11 +120,11 @@ func promote(skill_lvl):
 			sprite.material.set("shader_param/outline_color", color_elite);
 			sprite.offset.y -= 1
 			multiplier = elite_multiplier
-	gold *= round(multiplier * 0.6)
-	xp *= round(multiplier * 1.4)
-	max_health *= multiplier
+	gold = round(gold * multiplier * 0.6)
+	xp = round(xp * multiplier * 1.4)
+	max_health = round(max_health *  multiplier)
 	health = max_health
-	speed = speed - 0.1 * (multiplier - 1) + rand_range(-0.1, 0.3)
+	speed = speed - 0.1 * (multiplier - 1) + rand_range(0, 0.5)
 	weapon = DiceHelper.multiply(weapon, multiplier)
 	
 func _process(delta):
@@ -165,7 +164,7 @@ func start_fight(enemy):
 
 func set_vulnerable():
 	in_reflection = false
-	reflection_timer.start(time_invincible)
+	reflection_timer.start(time_invincible + rand_range(-1, 1))
 
 func stop():
 	player = null
@@ -185,16 +184,15 @@ func deal_damage():
 
 func dodge():
 	dodge_animation_player.play("Dodge")
-	dodge_timer.start(3)
 
-func get_hurt(dmg):
+func get_hurt(dmg, is_from_reflect = false):
 	hurt_animation_player.play("Hurt")
 	create_dmg_indicator(dmg)
 	health -= dmg
 	if health < 0:
 		health = 0
-	if has_power_dodge:
-		dodge_timer.start(3)
+	if has_power_dodge and not in_dodge_mode and not is_from_reflect:
+		dodge_timer.start(2)
 		in_dodge_mode = true
 	healthbar.goto_value(health, max_health, 200)
 	sparks.amount = dmg * 2
@@ -206,8 +204,8 @@ func get_hurt(dmg):
 		explosion.position = position
 		call_deferred("queue_free")
 		emit_signal("die", gold, xp, is_level_boss)
-	elif has_power_counter and attack_timer.time_left > 0.3:
-		attack_timer.start(0.3)
+	elif has_power_counter and attack_timer.time_left > 0.4:
+		attack_timer.start(0.4)
 
 func create_dmg_indicator(dmg, is_green = false):
 	var dmg_indicator = DamageIndicator.instance()

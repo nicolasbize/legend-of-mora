@@ -24,6 +24,7 @@ xp = 14
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 5 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -3 )
 
 [node name="CollisionShape2D" parent="ColliderArea" index="0"]
 position = Vector2( 0, -5 )

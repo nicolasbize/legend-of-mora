@@ -1,11 +1,13 @@
 extends Node
 
+var export_armor_games := false
+
 const SAVE_FILE_LOCATION := "user://legend-of-mora.data"
 
 var nb_days = 1
 var max_lvl_beat = -1 # beat plains => 1, beat forest => 2, etc
 var next_level_xp = 20
-var lvl_progression_multiplier = 1.4
+var lvl_progression_multiplier = 2.2
 var min_hero_speed = 0.5 # can't attack faster than this
 var max_levels = 10
 var berserk_quota = 0.5 # below 25% max_health, go berserk if you have the skill
@@ -14,6 +16,8 @@ var combo_dmg_multiplier = 1.2
 var is_first_run := true
 var nb_deaths := 0
 var is_loading_savegame := false
+var is_audio_enabled := true
+
 
 var no_weapon := {
 	"damage": "1d2",
@@ -151,7 +155,7 @@ var armors := [{
 var skills := [{
 	"title": "berserk",
 	"price": 200,
-	"xp": 3
+	"xp": 4
 }, {
 	"title": "multicombo",
 	"price": 500,
@@ -204,22 +208,22 @@ var enemies = {
 		"xp": 181
 	},
 	E.Giant: {
-		"health": 90,
+		"health": 150,
 		"damage": "4d3+8",
 		"speed": 3,
 		"gold": 294,
 		"xp": 248
 	},
 	E.Warrior: {
-		"health": 90,
-		"damage": "4d4+9",
+		"health": 70,
+		"damage": "4d4+11",
 		"speed": 2.2,
 		"gold": 355,
 		"xp": 328
 	},
 	E.Inferno: {
-		"health": 1000,
-		"damage": "5d6+35",
+		"health": 800,
+		"damage": "5d6+25",
 		"speed": 2,
 		"gold": 0,
 		"xp": 0
@@ -245,14 +249,10 @@ var levels = [[
 	[E.Warrior, E.Gnome3, E.Giant3],
 	[E.Warrior2, E.Warrior2, E.Warrior3]
 ], [
-	[E.Slime3, E.Slime3, E.Slime3],
-	[E.Blob3, E.Blob3, E.Blob3],
-	[E.Vermin3, E.Vermin3, E.Vermin3],
-	[E.Rat3, E.Rat3, E.Rat3],
-	[E.Gnome3, E.Gnome3, E.Gnome3],
-	[E.Giant3, E.Giant3, E.Giant3],
-	[E.Warrior3, E.Warrior3, E.Warrior3],
-	[], [],
+	[E.Slime, E.Blob, E.Vermin, E.Rat, E.Gnome, E.Giant, E.Warrior],
+	[E.Slime2, E.Blob2, E.Vermin2, E.Rat2, E.Gnome2, E.Giant2, E.Warrior2],
+	[E.Slime3, E.Blob3, E.Vermin3, E.Rat3, E.Gnome3, E.Giant3, E.Warrior3],
+	[], [], [], [],
 	[E.Inferno]
 ]]
 
@@ -302,12 +302,15 @@ func load_data(data, player):
 	player.max_health = data.player.max_health
 	player.has_potion = data.player.has_potion
 	player.gold = data.player.gold
-	for i in range(armors.size() - 1):
+	for i in range(armors.size()):
 		if armors[i].name == data.player.armor_name:
 			player.purchase_armor(i, true)
-	for i in range(weapons.size() - 1):
+			break
+	for i in range(weapons.size()):
 		if weapons[i].name == data.player.weapon_name:
 			player.purchase_weapon(i, true)
+			break
 	for skill in ["berserk", "multicombo", "reflect"]:
 		if data.player.skills.has(skill):
 			player.purchase_skill(0, true)
+			

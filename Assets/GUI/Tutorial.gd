@@ -28,17 +28,18 @@ func refresh():
 		pages[i].visible = current_page == i
 	if pages[1].visible:
 		defense_hint_label.text = "Try it out!"
-		tutorial_timer.start(2)
+		tutorial_timer.start(3)
 
 func on_defend_press():
-	if defend_button.activating:
-		if defend_button.is_activated:
+	# hack to process button press first
+	yield(get_tree().create_timer(0.1), "timeout")
+	if defend_button.is_idle():
+		defense_hint_label.text = "Wait for it to load..."
+	else:
+		if defend_button.is_success_activation:
 			defense_hint_label.text = "Successful block!"
 		else:
-			defense_hint_label.text = "Not quite!"
-	else:
-		defense_hint_label.text = "Not quite!"
-		
+			defense_hint_label.text = "Too late!"
 
 func on_next_press():
 	if current_page < pages.size() - 1:
@@ -55,4 +56,4 @@ func on_dismiss_press():
 	call_deferred("queue_free")
 
 func start_activation():
-	defend_button.activate()
+	defend_button.start_activation_animation()

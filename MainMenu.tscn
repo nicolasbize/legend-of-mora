@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Fonts/intro_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/CutScenes/title.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/game_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://Assets/GUI/ClickableLabel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/GUI/logo-armor-games.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -63,18 +64,18 @@ texture = ExtResource( 2 )
 
 [node name="TitleLabel" type="Label" parent="TextureRect"]
 margin_left = 6.0
-margin_top = 13.0
+margin_top = 8.0
 margin_right = 123.0
-margin_bottom = 23.0
+margin_bottom = 18.0
 custom_colors/font_color = Color( 0.92549, 0.596078, 0.0431373, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "The legend of Mora"
 align = 1
 
-[node name="GoldLabel2" type="Label" parent="TextureRect"]
-margin_left = 97.0
+[node name="CreditLabel" type="Label" parent="TextureRect"]
+margin_left = 98.0
 margin_top = 77.0
-margin_right = 125.0
+margin_right = 126.0
 margin_bottom = 90.0
 rect_pivot_offset = Vector2( 44, 5 )
 custom_colors/font_color = Color( 0.745098, 0.745098, 0.745098, 1 )
@@ -82,35 +83,51 @@ custom_fonts/font = ExtResource( 1 )
 text = "By Gad"
 align = 2
 
-[node name="NewGameButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 40.0
-margin_top = 43.0
-margin_right = 88.0
-margin_bottom = 54.0
-mouse_filter = 1
-text = "new game"
-
 [node name="ContinueButton" parent="TextureRect" instance=ExtResource( 5 )]
-margin_left = 39.0
-margin_top = 29.0
-margin_right = 90.0
-margin_bottom = 40.0
+margin_left = 38.0
+margin_top = 23.0
+margin_right = 89.0
+margin_bottom = 34.0
 mouse_filter = 1
 text = "continue"
 
+[node name="NewGameButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 40.0
+margin_top = 36.0
+margin_right = 88.0
+margin_bottom = 47.0
+mouse_filter = 1
+text = "new game"
+
 [node name="IntroButton" parent="TextureRect" instance=ExtResource( 5 )]
 margin_left = 30.0
-margin_top = 56.0
+margin_top = 49.0
 margin_right = 99.0
-margin_bottom = 67.0
+margin_bottom = 60.0
 mouse_filter = 1
 text = "watch   intro"
 
+[node name="PlayMoreGamesButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 36.0
+margin_top = 68.0
+margin_right = 131.0
+margin_bottom = 79.0
+mouse_filter = 1
+text = "play more games"
+
+[node name="LikeUsButton" parent="TextureRect" instance=ExtResource( 5 )]
+margin_left = 70.0
+margin_top = 79.0
+margin_right = 139.0
+margin_bottom = 90.0
+mouse_filter = 1
+text = "like us!"
+
 [node name="QuitButton" parent="TextureRect" instance=ExtResource( 5 )]
 margin_left = 50.0
-margin_top = 69.0
+margin_top = 64.0
 margin_right = 78.0
-margin_bottom = 80.0
+margin_bottom = 75.0
 mouse_filter = 1
 text = "quit"
 
@@ -124,3 +141,8 @@ color = Color( 0, 0, 0, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/TransitionScene = SubResource( 2 )
+
+[node name="ArmorGamesLogo" type="Sprite" parent="."]
+position = Vector2( 23, 78 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 6 )

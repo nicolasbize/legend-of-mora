@@ -172,6 +172,7 @@ position = Vector2( 0, -6.5 )
 shape = SubResource( 8 )
 
 [node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
 position = Vector2( -8, 4 )

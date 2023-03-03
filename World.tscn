@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Assets/GUI/LevelUp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/GUI/Inventory.tscn" type="PackedScene" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://Assets/GUI/LevelPicker.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Sound/upgrade.wav" type="AudioStream" id=18]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/GUI/sound-on.png" type="Texture" id=20]
+[ext_resource path="res://Assets/GUI/sound-off.png" type="Texture" id=21]
+[ext_resource path="res://Assets/GUI/TownButton.tscn" type="PackedScene" id=22]
 
 [sub_resource type="Animation" id=8]
 resource_name = "EnterAlchimist"
@@ -246,18 +249,6 @@ tracks/1/keys = {
 "args": [  ],
 "method": "on_ready_for_ending"
 } ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("MainMusic:volume_db")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 3.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ -10.0, -80.0 ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -619,48 +610,12 @@ tracks/12/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("TownMusic:playing")
+tracks/13/path = NodePath("Game UI/BattleIndicator:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/14/type = "value"
-tracks/14/path = NodePath("MainMusic:volume_db")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ -10.0, -80.0 ]
-}
-tracks/15/type = "value"
-tracks/15/path = NodePath("TownMusic:volume_db")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -10.0 ]
-}
-tracks/16/type = "value"
-tracks/16/path = NodePath("Game UI/BattleIndicator:visible")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -876,18 +831,6 @@ tracks/12/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("TownMusic:playing")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -1572,36 +1515,12 @@ tracks/23/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/24/type = "value"
-tracks/24/path = NodePath("TownMusic:playing")
+tracks/24/path = NodePath("Game UI/BattleIndicator:visible")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/25/type = "value"
-tracks/25/path = NodePath("MainMusic:playing")
-tracks/25/interp = 1
-tracks/25/loop_wrap = true
-tracks/25/imported = false
-tracks/25/enabled = true
-tracks/25/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/26/type = "value"
-tracks/26/path = NodePath("Game UI/BattleIndicator:visible")
-tracks/26/interp = 1
-tracks/26/loop_wrap = true
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -1660,48 +1579,12 @@ tracks/3/keys = {
 "values": [ true, true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("TownMusic:volume_db")
+tracks/4/path = NodePath("Game UI/BattleIndicator:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ -10.0, -80.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("TownMusic:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 1.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("MainMusic:volume_db")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 2 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -10.0 ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Game UI/BattleIndicator:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -1789,16 +1672,16 @@ texture = ExtResource( 10 )
 [node name="Armory" parent="Game UI" instance=ExtResource( 14 )]
 visible = false
 margin_top = -92.0
-margin_right = 6272.0
-margin_bottom = 4416.0
+margin_right = 7296.0
+margin_bottom = 5152.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="Blacksmith" parent="Game UI" instance=ExtResource( 12 )]
 visible = false
 margin_top = -92.0
-margin_right = 7168.0
-margin_bottom = 5060.0
+margin_right = 8192.0
+margin_bottom = 5796.0
 mouse_filter = 1
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
@@ -1806,8 +1689,8 @@ player_path = NodePath("../../Hero")
 [node name="Alchimist" parent="Game UI" instance=ExtResource( 15 )]
 visible = false
 margin_top = -92.0
-margin_right = 6144.0
-margin_bottom = 4324.0
+margin_right = 7168.0
+margin_bottom = 5060.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 shop_type = 2
@@ -1815,16 +1698,16 @@ shop_type = 2
 [node name="Library" parent="Game UI" instance=ExtResource( 16 )]
 visible = false
 margin_top = -92.0
-margin_right = 6016.0
-margin_bottom = 4232.0
+margin_right = 7040.0
+margin_bottom = 4968.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="LevelPicker" parent="Game UI" instance=ExtResource( 17 )]
 visible = false
 margin_left = 130.0
-margin_right = 6018.0
-margin_bottom = 4232.0
+margin_right = 7042.0
+margin_bottom = 4968.0
 
 [node name="Town" parent="Game UI" instance=ExtResource( 11 )]
 visible = false
@@ -1835,16 +1718,16 @@ transition_animation_path = NodePath("../TransitionAnimationPlayer")
 [node name="Stats" parent="Game UI" instance=ExtResource( 4 )]
 visible = false
 margin_top = -92.0
-margin_right = 4096.0
-margin_bottom = 2852.0
+margin_right = 5120.0
+margin_bottom = 3588.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
 [node name="Inventory" parent="Game UI" instance=ExtResource( 2 )]
 visible = false
 margin_top = -92.0
-margin_right = 3968.0
-margin_bottom = 2760.0
+margin_right = 4992.0
+margin_bottom = 3496.0
 transition_animation_path = NodePath("../TransitionAnimationPlayer")
 player_path = NodePath("../../Hero")
 
@@ -1852,13 +1735,14 @@ player_path = NodePath("../../Hero")
 visible = false
 
 [node name="BattleIndicator" parent="Game UI" instance=ExtResource( 6 )]
+pause_mode = 2
 position = Vector2( 28, 53 )
 
 [node name="LevelUp" parent="Game UI" instance=ExtResource( 1 )]
 visible = false
 margin_top = -92.0
-margin_right = 4736.0
-margin_bottom = 3312.0
+margin_right = 5760.0
+margin_bottom = 4048.0
 
 [node name="BlackRect" type="ColorRect" parent="Game UI"]
 modulate = Color( 1, 1, 1, 0 )
@@ -1894,6 +1778,16 @@ anims/LeaveTown = SubResource( 12 )
 anims/RESET = SubResource( 2 )
 anims/StartLevel = SubResource( 13 )
 anims/StartLevelUp = SubResource( 14 )
+
+[node name="SoundButton" parent="Game UI" instance=ExtResource( 22 )]
+margin_left = 116.0
+margin_top = 81.0
+margin_right = 125.0
+margin_bottom = 89.0
+toggle_mode = true
+pressed = true
+texture_normal = ExtResource( 21 )
+texture_pressed = ExtResource( 20 )
 
 [node name="CurrentLevel" type="Node2D" parent="."]
 

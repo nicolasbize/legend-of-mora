@@ -37,7 +37,8 @@ func on_mouse_exit():
 func on_mouse_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		emit_signal("pressed")
-		click_sound.play()
+		if GameState.is_audio_enabled:
+			click_sound.play()
 		if not is_toggle:
 			on_mouse_exit()
 	

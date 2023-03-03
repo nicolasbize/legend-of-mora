@@ -34,6 +34,7 @@ func _process(delta):
 		if elapsed <= progressive_duration and elapsed > 0:
 			current_amount_bar.rect_size.x = lerp(start_width, target_width, elapsed / progressive_duration)
 		elif elapsed >= progressive_duration:
+			current_amount_bar.rect_size.x = target_width
 			type = DEFAULT
 			emit_signal("complete")
 

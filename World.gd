@@ -16,11 +16,13 @@ onready var health_bar := $"Game UI/Topbar/HealthBar"
 onready var gold_label = $"Game UI/Topbar/GoldLabel"
 onready var xp_bar := $"Game UI/Topbar/XPBar"
 onready var main_music := $MainMusic
+onready var town_music := $TownMusic
 onready var upgrade_sound := $UpgradeSound
 onready var battle_indicator := $"Game UI/BattleIndicator"
 onready var camera := $Camera2D
 onready var game_timer := $GameTimer
 onready var game_ui := $"Game UI"
+onready var sound_button := $"Game UI/SoundButton"
 
 var current_level_index := 0
 
@@ -33,12 +35,13 @@ func _ready():
 	hero.connect("level_complete", self, "on_hero_level_complete")
 	level_up.connect("level_up", self, "on_hero_level_up")
 	game_timer.connect("timeout", self, "on_first_lvl_start")
+	sound_button.connect("pressed", self, "on_mute_press")
 	if GameState.is_loading_savegame:
 		load_game()
 	else:
 		gold_label.set_value(hero.gold)
 		xp_bar.set_value(0, GameState.next_level_xp)
-#	set_test_data()	
+#	set_test_data()
 	start_level(current_level_index)
 
 func set_test_data():
@@ -77,6 +80,7 @@ func start_level(lvl_nb):
 	health_bar.set_width(hero.max_health)
 	hero.remote_transform.remote_path = camera.get_path()
 	hero.start_run()
+	town_music.stop()
 	main_music.play(0)
 	if lvl_nb == 0 and GameState.is_first_run:
 		game_timer.start(2)
@@ -87,8 +91,7 @@ func on_hero_level_complete():
 	if GameState.max_lvl_beat < current_level_index:
 		GameState.max_lvl_beat = current_level_index
 	if GameState.max_lvl_beat < GameState.levels.size() - 1:
-		save_game()		
-		transition_animation_player.play("EnterTown")
+		enter_town()
 	else:
 		transition_animation_player.play("EnterEnding")
 		
@@ -111,6 +114,7 @@ func load_game():
 	save_game.close()
 	xp_bar.goto_value(hero.xp, GameState.next_level_xp, 200)
 	health_bar.set_width(hero.max_health)
+	gold_label.set_value(hero.gold)
 
 func on_hero_health_change(health):
 	health_bar.goto_value(health, hero.max_health, 200)
@@ -129,7 +133,7 @@ func on_hero_xp_change(xp):
 func on_hero_level_up(perk):
 	hero.xp_level += 1
 	hero.xp -= GameState.next_level_xp
-	GameState.next_level_xp = round(GameState.next_level_xp * 2.2)
+	GameState.next_level_xp = round(GameState.next_level_xp * (GameState.lvl_progression_multiplier - 0.05 * hero.xp_level))
 	xp_bar.goto_value(hero.xp, GameState.next_level_xp, 200)
 	if perk == "strength":
 		hero.strength += 1
@@ -146,6 +150,22 @@ func on_hero_level_up(perk):
 
 func on_hero_death():
 	GameState.nb_days += 1
-	transition_animation_player.play("EnterTown")
-	save_game()
+	enter_town()
 	
+func enter_town():
+	save_game()
+	transition_animation_player.play("EnterTown")
+	main_music.stop()
+	town_music.play(0)
+
+func on_mute_press():
+	GameState.is_audio_enabled = !GameState.is_audio_enabled
+	sound_button.pressed = GameState.is_audio_enabled
+	if GameState.is_audio_enabled:
+		main_music.volume_db = -10
+		town_music.volume_db = -10
+		upgrade_sound.volume_db = -10
+	else:
+		main_music.volume_db = -100
+		town_music.volume_db = -100
+		upgrade_sound.volume_db = -100
